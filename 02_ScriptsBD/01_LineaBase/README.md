@@ -15,6 +15,6 @@ Ejecutar SQLPLUS o si tiene un entorno de desarrollo SQL DEVELOPER y ejecutar el
 #usuario:
 Luego se debería poder ingresar al esquema con el usuario creado : 
 
-#PACRIM_US/ pacrim_us
+#FS_PCRM_US/ fs_pcrm_us
 
 
