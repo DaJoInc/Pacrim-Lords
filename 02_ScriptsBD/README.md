@@ -7,7 +7,7 @@ En esta parte se tratará el diseño inicial del modelo de datos de la aplicaci�
 
 # Modelo de datos Pacrim
 
-![alt text](https://github.com/DaJoInc/Pacrim-Lords/blob/master/ModelodeDatosPacrim.jpg)
+![alt text](https://github.com/DaJoInc/Pacrim-Lords/blob/master/ModelodeDatosPacrim10.jpg)
 			
 # Nomenclatura de tablas 
 
