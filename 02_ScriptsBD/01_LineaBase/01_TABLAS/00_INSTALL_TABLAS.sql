@@ -32,9 +32,6 @@ PROMPT NE_TPRNE.sql...
 @@NE_TPRNE.sql
 
 
-PROMPT NE_TPVNE.sql...
-@@NE_TPVNE.sql
-
 
 PROMPT NE_TPVUS.sql...
 @@NE_TPVUS.sql

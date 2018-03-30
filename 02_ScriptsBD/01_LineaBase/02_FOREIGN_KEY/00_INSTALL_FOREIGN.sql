@@ -8,6 +8,9 @@ REM ******************************************************************
 PROMPT EM_TEMTE_FK.sql...
 @@EM_TEMTE_FK.sql
 
+PROMPT NE_TPVUS_FK.sql.sql...
+@@NE_TPVUS_FK.sql
+
 PROMPT NE_TCLNE_FK.sql...
 @@NE_TCLNE_FK.sql
 

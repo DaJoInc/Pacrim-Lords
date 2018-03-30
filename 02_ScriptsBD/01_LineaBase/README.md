@@ -12,9 +12,10 @@ Ejecutar SQLPLUS o si tiene un entorno de desarrollo SQL DEVELOPER y ejecutar el
 
 -	Verificar si el archivo Spool encuentra errores graves de instalación 
 
-#usuario:
+# Usuario:
 Luego se debería poder ingresar al esquema con el usuario creado : 
 
-#FS_PCRM_US/ fs_pcrm_us
+# FS_PCRM_US/ fs_pcrm_us
 
 
+# Ejecutar Dos veces el script de datos por si el bloque anonimo no constracta con las tablas 

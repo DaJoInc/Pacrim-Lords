@@ -19,7 +19,8 @@ CREATE TABLE  "FS_PCRM_US"."US_TUSNE"
 	"USNE_EMAL" VARCHAR2(50) NULL,    -- Email  del usuario en el negocio
 	"USNE_PAIS" VARCHAR2(50) NULL,    -- Pais  del usuario en el negocio
 	"USNE_USAO" VARCHAR2(200) NULL,    -- Alias usuario en el negocio
-	"USNE_NRID" NUMBER(22) NULL    -- Numero de indentificacion del usuario
+	"USNE_NRID" NUMBER(22) NULL,    -- Numero de indentificacion del usuario
+	"USNE_PSWD" VARCHAR2(200) NULL    -- Con ingreso app
 )
 TABLESPACE	TS_PACRIM
 PCTFREE		10
@@ -69,6 +70,8 @@ COMMENT ON COLUMN  "FS_PCRM_US"."US_TUSNE"."USNE_USAO" IS 'Alias usuario en el n
 ;
 
 COMMENT ON COLUMN  "FS_PCRM_US"."US_TUSNE"."USNE_NRID" IS 'Numero de indentificacion del usuario'
+;
+COMMENT ON COLUMN  "FS_PCRM_US"."US_TUSNE"."USNE_PSWD" IS 'Con ingreso app'
 ;
 
 ALTER TABLE  "FS_PCRM_US"."US_TUSNE" 

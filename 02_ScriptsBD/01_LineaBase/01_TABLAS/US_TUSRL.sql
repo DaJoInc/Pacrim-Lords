@@ -14,8 +14,8 @@ CREATE TABLE  "FS_PCRM_US"."US_TUSRL"
 	"USRL_USRL" NUMBER(22) NOT NULL,    -- Identificador  unico de la union de roles y usuarios
 	"USRL_FCCR" DATE NULL,    -- Fecha creacion de la union de roles y usuarios
 	"USRL_FCMO" DATE NULL,    -- Fecha modificacion de la union de roles y usuarios
-	"USNE_USNE" NUMBER(22) NULL,
-	"TPRL_TPRL" NUMBER(22) NULL
+	"USNE_USNE" NUMBER(22) NOT NULL,
+	"TPRL_TPRL" NUMBER(22) NOT NULL
 )
 TABLESPACE	TS_PACRIM
 PCTFREE		10

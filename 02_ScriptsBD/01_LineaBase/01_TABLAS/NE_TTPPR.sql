@@ -14,7 +14,7 @@ CREATE TABLE  "FS_PCRM_US"."NE_TTPPR"
 	"TPPR_TPPR" NUMBER(22) NOT NULL,    -- Identificador unico del tipo de producto
 	"TPPR_NBTP" VARCHAR2(50) NULL,    -- nombre  del tipo de producto
 	"TPPR_DETP" VARCHAR2(50) NULL,    -- descripcion  del tipo de producto
-	"PRNE_PRNE" NUMBER(22) NULL
+	"PRNE_PRNE" NUMBER(22) NOT NULL
 )
 TABLESPACE	TS_PACRIM
   pctfree 10
