@@ -11,12 +11,12 @@ REM ******************************************************************
 
 CREATE TABLE  "FS_PCRM_US"."NE_TEMUS"
 (
-	"EMUS_EMUS" VARCHAR2(50) NOT NULL,    -- Identificador unico de relacion empresa y usuario
+	"EMUS_EMUS" NUMBER(22) NOT NULL,    -- Identificador unico de relacion empresa y usuario
 	"EMUS_FECR" DATE NULL,    -- Fecha creacion de la relacion del sistema 
 	"EMUS_FEMO" DATE NULL,    -- Fecha modificacion de la relacion del sistema 
-	"TPNE_TPNE" NUMBER(22) NULL,
-	"EMTE_EMTE" NUMBER(22) NULL,
-	"USRL_USRL" NUMBER(22) NULL
+	"TPNE_TPNE" NUMBER(22) NOT NULL,
+	"EMTE_EMTE" NUMBER(22) NOT NULL,
+	"USRL_USRL" NUMBER(22) NOT NULL
 )
 TABLESPACE	TS_PACRIM
 PCTFREE		10

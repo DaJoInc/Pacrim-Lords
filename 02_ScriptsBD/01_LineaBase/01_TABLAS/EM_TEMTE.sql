@@ -14,8 +14,8 @@ CREATE TABLE  "FS_PCRM_US"."EM_TEMTE"
 	"EMTE_EMTE" NUMBER(22) NOT NULL,    -- Numero unico de relacion de empresa
 	"EMTE_DTCR" DATE NULL,    -- Fecha de creacion de la empresa
 	"EMTE_DTMO" DATE NULL,    -- Fecha modificacion de la empresa
-	"TPEM_TPEM" NUMBER(22) NULL,
-	"EMNE_EMNE" NUMBER(22) NULL
+	"TPEM_TPEM" NUMBER(22)NOT NULL,
+	"EMNE_EMNE" NUMBER(22)NOT NULL
 )
 TABLESPACE	TS_PACRIM
   pctfree 10

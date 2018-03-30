@@ -1,0 +1,2 @@
+INSERT INTO "FS_PCRM_US"."NE_TTPPV" (TPPV_TPPV, TPPV_TPNB, TPPV_DEPV, TPPV_FECR) VALUES ('1', 'Provedor Tegnologico', 'Aquellos provedores que tienen tipos tegnologicos', TO_DATE('2018-03-30 02:56:32', 'YYYY-MM-DD HH24:MI:SS'));
+COMMIT;

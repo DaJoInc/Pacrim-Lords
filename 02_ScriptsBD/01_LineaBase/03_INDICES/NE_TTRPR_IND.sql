@@ -18,5 +18,18 @@ TABLESPACE	TS_IPACRIM
     maxextents unlimited
   );
 
+  CREATE INDEX "IXFK_NE_TTRPR_NE_TCLNE"   
+ ON  "FS_PCRM_US"."NE_TTRPR"  ("CLNE_CLNE") 
+TABLESPACE	TS_IPACRIM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 128K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
 
   

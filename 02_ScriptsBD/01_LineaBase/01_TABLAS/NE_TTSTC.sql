@@ -16,7 +16,7 @@ CREATE TABLE  "FS_PCRM_US"."NE_TTSTC"
 	"TSTC_DEST" VARCHAR2(50) NULL,    -- descripcion estado cliente
 	"TSTC_DACR" DATE NULL,    -- Dia de creacion de estado cliente
 	"TSTC_DAMO" DATE NULL,    -- dia estado modificacion cliente
-	"CLNE_CLNE" NUMBER(22) NULL
+	"CLNE_CLNE" NUMBER(22) NOT NULL
 )
 TABLESPACE	TS_PACRIM
   pctfree 10
