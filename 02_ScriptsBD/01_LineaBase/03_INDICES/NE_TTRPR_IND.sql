@@ -19,17 +19,4 @@ TABLESPACE	TS_IPACRIM
   );
 
 
-CREATE INDEX "PK_NETTRPR"   
- ON  "FS_PCRM_US"."NE_TTRPR" ("TRPR_TRPR") 
-TABLESPACE	TS_IPACRIM
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 128K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  ); 
   

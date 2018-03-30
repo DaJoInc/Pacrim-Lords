@@ -6,10 +6,10 @@ REM ******************************************************************
 
 REM USUARIO DEL APLICATIVO PACRIM_US
 
-drop user PACRIM_US cascade;
+drop user FS_PCRM_US cascade;
 
-Create user PACRIM_US
- Identified by pacrim_us
+Create user FS_PCRM_US
+ Identified by fs_pcrm_us
  Default tablespace TS_PACRIM
  Temporary tablespace TS_TPACRIM    
  account unlock;
@@ -23,4 +23,4 @@ Grant RESOURCE,
   CREATE TRIGGER, CREATE USER , CREATE VIEW, CREATE TYPE,
   DROP PUBLIC SYNONYM, EXECUTE ANY PROCEDURE, 
   SELECT ANY SEQUENCE, SELECT ANY TABLE, 
-  UNLIMITED TABLESPACE to PACRIM_US;
+  UNLIMITED TABLESPACE to FS_PCRM_US;

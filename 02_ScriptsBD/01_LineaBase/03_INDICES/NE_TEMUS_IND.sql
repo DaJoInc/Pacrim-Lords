@@ -47,17 +47,3 @@ TABLESPACE	TS_IPACRIM
     maxextents unlimited
   );
   
-CREATE INDEX "PK_NETEUS"   
- ON  "FS_PCRM_US"."NE_TEMUS" ("EMUS_EMUS") 
-TABLESPACE	TS_IPACRIM
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 128K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
-  

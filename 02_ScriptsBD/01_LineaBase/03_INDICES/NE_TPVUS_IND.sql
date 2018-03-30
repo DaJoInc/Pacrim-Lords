@@ -46,18 +46,5 @@ TABLESPACE	TS_IPACRIM
     maxextents unlimited
   );
   
-CREATE INDEX "PK_NETPVUS"   
- ON  "FS_PCRM_US"."NE_TPVUS" ("PVUS_PVUS") 
-TABLESPACE	TS_IPACRIM
-  pctfree 10
-  initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 128K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
-  
+
   
