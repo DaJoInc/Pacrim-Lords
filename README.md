@@ -52,4 +52,12 @@ Debe especificar en el formato a continuación las pruebas unitarias a ejecutar 
 Definir estrategia	Diseño de casos de prueba	Gestión de pruebas	Herramientas de pruebas
 Pruebas en inserción de registros a BD	Inserción de datos directamente a la BD y luego por medio de la aplicación	Funciona: sale a producción
 No funciona: se devuelve a desarrollador	Motor Bd y aplicación en desarrollo
+
+
+# Arquitectura Inicial:
+
+
+# Modelo de datos Pacrim
+
+![alt text](https://github.com/DaJoInc/Pacrim-Lords/blob/master/ModelodeDatosPacrim10.jpg)
 			
