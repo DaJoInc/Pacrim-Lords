@@ -67,5 +67,6 @@ PROMPT US_TUSNE.sql...
 @@US_TUSNE.sql
 
 
-PROMPT US_TUSRL.sql..
-@@US_TUSRL.sql
+
+PROMPT NE_TCRTA.sql...
+@@NE_TCRTA.sql

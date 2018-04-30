@@ -107,7 +107,6 @@ set feedback on
          DROP SEQUENCE "FS_PCRM_US"."SNE_TTSTC";
           DROP SEQUENCE "FS_PCRM_US"."SUS_TTPRL";
           DROP SEQUENCE "FS_PCRM_US"."SUS_TUSNE";
-          DROP SEQUENCE "FS_PCRM_US"."SUS_TUSRL";
           
           
           

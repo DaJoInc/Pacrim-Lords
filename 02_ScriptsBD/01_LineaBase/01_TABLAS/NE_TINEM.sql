@@ -15,8 +15,8 @@ CREATE TABLE  "FS_PCRM_US"."NE_TINEM"
 	"INEM_NOIN" VARCHAR2(50) NULL,    -- Nombre del inventario
 	"INEM_DEIN" VARCHAR2(50) NULL,    -- Descripcion del inventario
 	"INEM_INCR" DATE NULL,    -- Fecha creacion del inventario
-	"PVUS_PVUS" NUMBER(22) NOT NULL,
-	"EMUS_EMUS" NUMBER(22) NOT NULL
+	"INEM_PVUS" NUMBER(22) NOT NULL,
+	"INEM_EMUS" NUMBER(22) NOT NULL
 )
 TABLESPACE	TS_PACRIM
   pctfree 10

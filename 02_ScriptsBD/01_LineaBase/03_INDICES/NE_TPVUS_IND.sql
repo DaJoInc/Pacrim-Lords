@@ -5,7 +5,7 @@ REM Base de Datos : FS_PCRM_US
 REM ******************************************************************
 
 CREATE INDEX "IXFK_NE_TPVUS_NE_TEMUS"   
- ON  "FS_PCRM_US"."NE_TPVUS" ("EMUS_EMUS") 
+ ON  "FS_PCRM_US"."NE_TPVUS" ("PVUS_EMUS") 
 TABLESPACE	TS_IPACRIM
   pctfree 10
   initrans 2
@@ -19,7 +19,7 @@ TABLESPACE	TS_IPACRIM
   );
 
 CREATE INDEX "IXFK_NE_TPVUS_NE_TTPPV"   
- ON  "FS_PCRM_US"."NE_TPVUS" ("TPPV_TPPV") 
+ ON  "FS_PCRM_US"."NE_TPVUS" ("PVUS_TPPV") 
 TABLESPACE	TS_IPACRIM
   pctfree 10
   initrans 2

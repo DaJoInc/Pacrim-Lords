@@ -15,9 +15,9 @@ CREATE TABLE  "FS_PCRM_US"."NE_TCLNE"
 	"CLNE_DNCL" NUMBER(22,2) NULL,    -- dinero actual del cliente
 	"CLNE_FCCR" DATE NULL,    -- fecha creacion cliente
 	"CLNE_FCMO" DATE NULL,    -- fecha modificacion cliente
-	"TSTC_TSTC" NUMBER(22) NOT NULL,
-	"TPCL_TPCL" NUMBER(22) NOT NULL,
-    "EMUS_EMUS" NUMBER(22) NOT NULL
+	"CLNE_TSTC" NUMBER(22) NOT NULL,
+	"CLNE_TPCL" NUMBER(22) NOT NULL,
+    "CLNE_EMUS" NUMBER(22) NOT NULL
 )
 TABLESPACE	TS_PACRIM
   pctfree 10

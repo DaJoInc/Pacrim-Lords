@@ -13,8 +13,6 @@ PROMPT US_TTPRL.sql..
 @@US_TTPRL.sql
 
 
-PROMPT US_TUSRL.sql..
-@@US_TUSRL.sql
 
 PROMPT NE_TTPNE.sql...
 @@NE_TTPNE.sql

@@ -14,8 +14,8 @@ CREATE TABLE  "FS_PCRM_US"."NE_TPVUS"
 	"PVUS_PVUS" NUMBER(22) NOT NULL,    -- Numero unico de relacion de usuarios provedores
 	"PVUS_FECR" DATE NULL,    -- Fecha Creacion de la relacion de provedor usuario
 	"PVUS_FEMO" DATE NULL,    -- Fecha Modificacion de la relacion de provedor usuario
-	"TPPV_TPPV" NUMBER(22) NOT NULL,
-	"EMUS_EMUS" NUMBER(22) NOT NULL
+	"PVUS_TPPV" NUMBER(22) NOT NULL,
+	"PVUS_EMUS" NUMBER(22) NOT NULL
 )
 TABLESPACE	TS_PACRIM
 PCTFREE		10

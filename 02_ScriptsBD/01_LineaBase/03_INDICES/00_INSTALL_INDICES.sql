@@ -38,6 +38,4 @@ PROMPT NE_TTRPR_IND.sql...
 
 
 
-PROMPT US_TUSRL_IND.sql...
-@@US_TUSRL_IND.sql
 

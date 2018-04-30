@@ -8,7 +8,7 @@ REM ******************************************************************
 
 ALTER TABLE  "FS_PCRM_US"."NE_TINEM" 
  ADD CONSTRAINT "FK_NE_TINEM_NE_TPVUS"
-	FOREIGN KEY ("PVUS_PVUS") REFERENCES  "FS_PCRM_US"."NE_TPVUS" ("PVUS_PVUS");
+	FOREIGN KEY ("INEM_PVUS") REFERENCES  "FS_PCRM_US"."NE_TPVUS" ("PVUS_PVUS");
     
 
     
