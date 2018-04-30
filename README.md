@@ -59,5 +59,5 @@ No funciona: se devuelve a desarrollador	Motor Bd y aplicación en desarrollo
 
 # Modelo de datos Pacrim
 
-![alt text](https://github.com/DaJoInc/Pacrim-Lords/blob/master/ModelodeDatosPacrim10.jpg)
+![alt text](https://github.com/DaJoInc/Pacrim-Lords/blob/master/ModelodeDatosPacrim100.jpg)
 			
