@@ -37,7 +37,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QUSUARIO IS
 		p_cod_rta          	  OUT  NE_TCRTA.CRTA_CRTA%type
     
     );
- 
+  -- ------------------------------------------------------------
 	PROCEDURE obtenerIdRol
     (
         p_nombre_rusuario  		  IN  US_TTPRL.TPRL_RLDN%type,
