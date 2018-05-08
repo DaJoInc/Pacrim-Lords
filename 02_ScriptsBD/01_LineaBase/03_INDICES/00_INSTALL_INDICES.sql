@@ -27,11 +27,11 @@ PROMPT NE_TPRNE_IND.sql...
 
 
 
-
 PROMPT NE_TPVUS_IND.sql...
 @@NE_TPVUS_IND.sql
 
-
+PROMPT US_TPUSR_IND.sql...
+@@US_TPUSR_IND.sql
 
 PROMPT NE_TTRPR_IND.sql...
 @@NE_TTRPR_IND.sql

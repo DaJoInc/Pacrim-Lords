@@ -9,12 +9,11 @@ REM ******************************************************************
 
 /* Create Tables */
 
-CREATE TABLE  "FS_PCRM_US"."NE_TTPNE"
+CREATE TABLE  "FS_PCRM_US"."NE_TSTNE"
 (
-	"TPNE_TPNE" NUMBER(22) NOT NULL,    -- Identificador unico del tipo de negocio 
-	"TPNE_DENE" VARCHAR2(100) NULL,    -- Descripcion del tipo de negocio
-	"TPNE_FECR" DATE NULL,    -- Fecha Creacion del tipo de negocio
-	"TPNE_FEMO" DATE NULL    -- Fecha Modificiacion del tipo de negocio
+	"STNE_STNE" NUMBER(22) NOT NULL,   -- Identificador unico del estado de negocio 
+	"STNE_DENE" VARCHAR2(100) NULL,    -- Descripcion del estado de negocio
+	"STNE_FEMO" DATE NULL              -- Fecha Modificiacion del estado de negocio
 )
 TABLESPACE	TS_PACRIM
   pctfree 10
@@ -30,21 +29,20 @@ TABLESPACE	TS_PACRIM
 
 /* Create Comments, Sequences and Triggers for Autonumber Columns */
 
-COMMENT ON TABLE  "FS_PCRM_US"."NE_TTPNE" IS 'Tabla que almacena el tipo de negocio que tienen los usuarios y las empresas '
+COMMENT ON TABLE  "FS_PCRM_US"."NE_TSTNE" IS 'Tabla que almacena el estado del negocio que tienen los usuarios en las empresas'
 ;
 
-COMMENT ON COLUMN  "FS_PCRM_US"."NE_TTPNE"."TPNE_TPNE" IS 'Identificador unico del tipo de negocio '
+COMMENT ON COLUMN  "FS_PCRM_US"."NE_TSTNE"."STNE_STNE" IS 'Identificador unico del estado de negocio '
 ;
 
-COMMENT ON COLUMN  "FS_PCRM_US"."NE_TTPNE"."TPNE_DENE" IS 'Descripcion del tipo de negocio'
+COMMENT ON COLUMN  "FS_PCRM_US"."NE_TSTNE"."STNE_DENE" IS 'Descripcion del estado de negocio'
 ;
 
-COMMENT ON COLUMN  "FS_PCRM_US"."NE_TTPNE"."TPNE_FECR" IS 'Fecha Creacion del tipo de negocio'
+COMMENT ON COLUMN  "FS_PCRM_US"."NE_TSTNE"."STNE_FEMO" IS 'Fecha Modificiacion del estado de negocio'
 ;
 
-COMMENT ON COLUMN  "FS_PCRM_US"."NE_TTPNE"."TPNE_FEMO" IS 'Fecha Modificiacion del tipo de negocio'
+ALTER TABLE  "FS_PCRM_US"."NE_TSTNE" 
+ ADD CONSTRAINT "PK_STNE"
+	PRIMARY KEY ("STNE_STNE") 
+ USING INDEX
 ;
-
-ALTER TABLE  "FS_PCRM_US"."NE_TTPNE" 
- ADD CONSTRAINT "PK_TPNE"
-	PRIMARY KEY ("TPNE_TPNE") USING INDEX;

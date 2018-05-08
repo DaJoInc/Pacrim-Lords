@@ -8,6 +8,9 @@ REM ******************************************************************
 PROMPT EM_TEMNE.sql...
 @@EM_TEMNE.sql
 
+PROMPT NE_TSTNE.sql...
+@@NE_TSTNE.sql
+
 PROMPT EM_TEMTE.sql...
 @@EM_TEMTE.sql
 
@@ -41,8 +44,6 @@ PROMPT NE_TTPCL.sql...
 @@NE_TTPCL.sql
 
 
-PROMPT NE_TTPNE.sql...
-@@NE_TTPNE.sql
 
 
 PROMPT NE_TTPPR.sql...
@@ -60,13 +61,19 @@ PROMPT NE_TTSTC.sql...
 @@NE_TTSTC.sql
 
 
-PROMPT US_TTPRL.sql..
-@@US_TTPRL.sql
+PROMPT US_TRLNE.sql..
+@@US_TRLNE.sql
 
 PROMPT US_TUSNE.sql...
 @@US_TUSNE.sql
 
+PROMPT US_TPSNE.sql...
+@@US_TPSNE.sql
 
+
+
+PROMPT US_TPUSRUS_TPUSRUS_TPUSRUS_TPUSR.sql...
+@@US_TPUSR.sql
 
 PROMPT NE_TCRTA.sql...
 @@NE_TCRTA.sql
