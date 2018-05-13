@@ -1,10 +1,10 @@
 prompt
-prompt PACKAGE: EM_QEMPRESAS
+prompt PACKAGE: EM_QFEMPSA
 prompt
-CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QEMPRESAS IS
+CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QFEMPSA IS
     --
     -- ===========================================================
-    -- EM_QEMPRESAS
+    -- EM_QFEMPSA
     -- -----------------------------------------------------------
     -- Reúne funciones y procedimientos relacionados con la 
     -- gestion de Usuarios. Paquete especializado de negocio
@@ -28,15 +28,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QEMPRESAS IS
     -- Declaracion de PROCEDIMIENTOS y FUNCIONES
     -- ============================================================
     
-	PROCEDURE obtenerEmpresaPorTipo
-    (
-        p_nombre_empresa      	  IN  EM_TEMNE.EMNE_NOBE%type,
-		p_tempresa_nombre  		  IN  EM_TTPEM.TPEM_DTEM%type,
-		p_empresa                 OUT EM_TT_EMTP,
-		p_cod_rta          	  	  OUT NE_TCRTA.CRTA_CRTA%type
-		
 
-    );
 	
 	PROCEDURE obtenerIdEmpresa
     (
@@ -54,15 +46,15 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QEMPRESAS IS
     ); 
     -- ------------------------------------------------------------
     
-END EM_QEMPRESAS;
+END EM_QFEMPSA;
 /
 
 
 prompt
-prompt PACKAGE BODY:EM_QEMPRESAS
+prompt PACKAGE BODY:EM_QFEMPSA
 prompt
 
-CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QEMPRESAS IS
+CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QFEMPSA IS
 
 
     --
@@ -87,7 +79,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QEMPRESAS IS
 			SELECT
 				emne_emne
 			FROM
-				fs_pcrm_us.em_temne
+				FS_PCRM_US.em_temne
 			WHERE
 			   emne_nobe=p_nombre_empresa;
 
@@ -133,7 +125,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QEMPRESAS IS
 			SELECT
 				tpem_tpem
 			FROM
-				fs_pcrm_us.em_ttpem
+				FS_PCRM_US.em_ttpem
 			WHERE
 				tpem_dtem = p_tempresa_nombre;
 				
@@ -162,102 +154,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QEMPRESAS IS
     END obtenerIdTEmpresa;
 	
 	
-	     -- ===========================================================
-    -- PROCEDURE consultarRolUsuarioEmpresa
-    -- -----------------------------------------------------------
-    -- Servicio especializado para hacer la consultar del rol dado 
-    -- un usuario registrado en el sistema pacrim
-    -- ===========================================================
-	PROCEDURE obtenerEmpresaPorTipo
-    (
-        p_nombre_empresa      	  IN  EM_TEMNE.EMNE_NOBE%type,
-		p_tempresa_nombre  		  IN  EM_TTPEM.TPEM_DTEM%type,
-		p_empresa                 OUT EM_TT_EMTP,
-		p_cod_rta          	  	  OUT NE_TCRTA.CRTA_CRTA%type
-		
 
-    )IS
-
-        cursor c_empresa_tipo 
-		(
-			pc_EMTE_TPEM EM_TTPEM.TPEM_TPEM%type,
-			pc_EMTE_EMNE EM_TEMNE.EMNE_EMNE%type
-		)is
-			SELECT
-			   *
-			FROM
-				em_ttpem te,em_temne e, em_temte es
-			WHERE
-				te.TPEM_TPEM = es.EMTE_TPEM AND
-				e.EMNE_EMNE = es.EMTE_EMNE  AND 
-				es.EMTE_TPEM = pc_EMTE_TPEM AND
-				es.EMTE_EMNE = pc_EMTE_EMNE;
-
-        r_empresa_tipo c_empresa_tipo%rowtype;
-
-		v_id_nombre_empresa        EM_TTPEM.TPEM_TPEM%type;
-		v_id_nombre_tipo_empresa   EM_TTPEM.TPEM_TPEM%type;
-		v_cod_rta_tipo             NE_TCRTA.CRTA_CRTA%type;
-		v_cod_rta          	  	   NE_TCRTA.CRTA_CRTA%type;
-		v_lista_empresa_tipo	   EM_TO_EMTP;
-
-		v_tt_lista_empresa_tipo EM_TT_EMTP := EM_TT_EMTP();
-    BEGIN
-
-		EM_QEMPRESAS.OBTENERIDTEMPRESA
-		(
-            p_tempresa_nombre,
-            v_id_nombre_tipo_empresa,
-            v_cod_rta_tipo
-        );
-		EM_QEMPRESAS.OBTENERIDEMPRESA
-		(
-            p_nombre_empresa,
-            v_id_nombre_empresa,
-            v_cod_rta
-        );
-
-
-		IF  v_cod_rta_tipo='OK' AND v_cod_rta='OK' THEN
-
-
-
-		   FOR   r_empresa_tipo in c_empresa_tipo(v_id_nombre_tipo_empresa,v_id_nombre_empresa) LOOP
-
-                v_lista_empresa_tipo:=EM_TO_EMTP(
-		            r_empresa_tipo.TPEM_TPEM,
-		            r_empresa_tipo.TPEM_DTEM,
-		            r_empresa_tipo.TPEM_STEM, 
-		            r_empresa_tipo.TPEM_FCCR,
-		            r_empresa_tipo.TPEM_FCMO,
-		            r_empresa_tipo.EMNE_EMNE,
-		            r_empresa_tipo.EMNE_NOBE,
-		            r_empresa_tipo.EMNE_NITE,	 
-		            r_empresa_tipo.EMNE_FECR,	 
-		            r_empresa_tipo.EMNE_FEMO,	 
-		            r_empresa_tipo.EMTE_EMTE, 	 
-		            r_empresa_tipo.EMTE_DTCR,	 
-		            r_empresa_tipo.EMTE_DTMO,	 
-		            r_empresa_tipo.EMTE_TPEM,	 
-		            r_empresa_tipo.EMTE_EMNE	 
-		        );
-                v_tt_lista_empresa_tipo.extend;
-                v_tt_lista_empresa_tipo(v_tt_lista_empresa_tipo.count):=v_lista_empresa_tipo;
-
-             END LOOP;
-            p_empresa:= v_tt_lista_empresa_tipo;
-			p_cod_rta  := 'OK';
-		ELSE
-            p_empresa:= null;
-            p_cod_rta  := 'ER_EMP_NUL';
-        end if;
-    EXCEPTION
-        WHEN OTHERS THEN
-            p_empresa:= null;
-            p_cod_rta  := 'ERROR_NC';
-
-    END obtenerEmpresaPorTipo;
     
-    
-END EM_QEMPRESAS;
+END EM_QFEMPSA;
 /
