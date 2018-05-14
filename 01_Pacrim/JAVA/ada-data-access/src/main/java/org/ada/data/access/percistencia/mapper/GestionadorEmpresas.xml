@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ada.data.access.percistencia.mapper.GestionadorEmpresasMapper">
+	
+	<select id="crearEmpresaNegocio" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.crearEmpreNeg
+            (      	        
+                #{p_nombre_emprsa   ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nit_emprsa      ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_tp_emprsa       ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_cod_rta         ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT},
+                #{p_msj_rta         ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT}
+            )         
+		}
+	</select>
+
+	<select id="asignarNegocioEmpresa" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.asignarNegoEmp
+            (      	        
+                #{p_nombre_emprsa     ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nit_emprsa        ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_tp_emprsa         ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_cod_rta           ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT},
+                #{p_msj_rta           ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT}
+            )         
+		}
+	</select>
+
+
+</mapper>

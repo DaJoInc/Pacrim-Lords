@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ada.data.access.percistencia.mapper.GestionadorNegocioMapper">
+	
+	<select id="registrarUsuarioNegocio" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.registrarUsEmNego
+            (
+		        #{p_nombre_roll        ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=IN },
+		        #{p_nombre_usuario     ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=IN },
+		        #{p_documento_persona  ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=IN },
+		        #{p_nombre_emprsa      ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=IN },
+                #{p_nit_emprsa         ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=IN },
+                #{p_tp_emprsa          ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=IN },
+                #{p_id_ussy            ,jdbcType=NUMERIC  ,javaType=java.math.BigInteger  , mode=OUT },
+                #{p_cod_rta            ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=OUT},
+                #{p_msj_rta            ,jdbcType=VARCHAR  ,javaType=java.lang.String      , mode=OUT}
+            )         
+		}
+	</select>
+
+	<select id="inactivarNegocioUsuario" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.inactivarUsEmSy
+            (
+		        #{p_nombre_roll         ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_nombre_usuario      ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_documento_persona   ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nombre_emprsa       ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nit_emprsa          ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_tp_emprsa           ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_cod_rta             ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT},
+                #{p_msj_rta             ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT}
+            )         
+		}
+	</select>
+
+	<select id="activarNegocioUsuario" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.activarUsEmSy
+            (
+		        #{p_nombre_roll         ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_nombre_usuario      ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_documento_persona   ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nombre_emprsa       ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nit_emprsa          ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_tp_emprsa           ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_cod_rta             ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT},
+                #{p_msj_rta             ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT}
+            )         
+		}
+	</select>
+
+</mapper>

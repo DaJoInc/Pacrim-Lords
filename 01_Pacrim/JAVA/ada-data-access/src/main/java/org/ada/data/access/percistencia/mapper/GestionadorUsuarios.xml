@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ada.data.access.percistencia.mapper.GestionadorUsuariosMapper">
+	
+	<select id="crearUsuarioConRol" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.crearUsPeRo
+            (
+		        #{p_nombre_roll       ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_nombre_usuario    ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_password_usuario  ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_documento_persona ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_nombres_persona   ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_apellido_persona  ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_direccion_persona ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_telefono_persona  ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_email_persona     ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_pais_persona      ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_cod_rta           ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT},
+                #{p_msj_rta           ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT}
+            )         
+		}
+	</select>
+
+	<select id="actualizarUsuarioPersona" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.actualizarUsPe
+            (
+		        #{p_nombre_usuario        ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_documento_persona     ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_documento_persona_act ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_nombres_persona_act   ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_apellido_persona_act  ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_direccion_persona_act ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+		        #{p_telefono_persona_act  ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_email_persona_act     ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_pais_persona_act      ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nombre_usuario_act    ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_password_usuario_act  ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_cod_rta               ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT},
+                #{p_msj_rta               ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT}
+            )         
+		}
+	</select>
+
+    <select id="asignarRolUsuarioPersona" statementType="CALLABLE" parameterType="java.util.Map">
+		{call PC_API_WEB.asignarRolUsPe
+            (
+                #{p_nombre_roll          ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_nombre_usuario       ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_documento_persona    ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=IN },
+                #{p_cod_rta              ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT},
+                #{p_msj_rta              ,jdbcType=VARCHAR  ,javaType=java.lang.String  , mode=OUT}
+            )         
+		}
+	</select>
+
+</mapper>
