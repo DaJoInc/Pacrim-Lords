@@ -30,9 +30,28 @@ public class ConstantesApiPathRest {
 
 	/**
 	 * 
-	 * CRUD Convocatorias
+	 * CRUD usuario
 	 */
-	public static final String PATH_CONSULTA_CONVOVATORIAS = "/api/consultarConvocatorias";
+	public static final String PATH_REGISTRO_USUARIO   = "/api/usuario/registrar/usuario";
+	public static final String PATH_ACTUALIZAR_USUARIO = "/api/usuario/actualizar/usuario";
+	public static final String PATH_ASIGNAR_USUARIO    = "/api/usuario/asignar/usuario";
+	
+
+	/**
+	 * 
+	 * CRUD empresa
+	 */
+	public static final String PATH_REGISTRO_EMPRESA        = "/api/empresa/registrar/empresa";
+	public static final String PATH_ASIGNAR_EMPRESA_NEGOCIO = "/api/empresa/asignarnegocio/empresa";
+
+	
+	/**
+	 * 
+	 * CRUD empresa
+	 */
+	public static final String PATH_CREAR_NEGOCIO_USUARIO_EMPRESA        = "/api/negocio/crear/usuarioempresa";
+	public static final String PATH_INACTIVAR_NEGOCIO_USUARIO_EMPRESA    = "/api/negocio/inactivar/usuario";
+	public static final String PATH_ACTIVAR_NEGOCIO_USUARIO_EMPRESA      = "/api/negocio/activar/usuario";
 	
 	/**
 	 * LOGIN

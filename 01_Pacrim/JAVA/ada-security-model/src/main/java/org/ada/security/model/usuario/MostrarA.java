@@ -8,7 +8,7 @@
  * 
  */
 
-package org.ada.security.model.convocatoria;
+package org.ada.security.model.usuario;
 
 import java.math.BigDecimal;
 
