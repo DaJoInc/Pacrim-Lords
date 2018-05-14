@@ -15,7 +15,7 @@
 
 	<dependencies>
 			<dependency>
-				<groupId>org.ada</groupId>
+				<groupId>org.ada.core</groupId>
 				<artifactId>ada-utils</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>

@@ -133,18 +133,7 @@ public class AppConfig implements EnvironmentAware{
 	}
 
 
-	@Bean
-	public CacheManager cacheManager() {
-		return new EhCacheCacheManager(ehCacheCacheManager().getObject());
-	}
 
-	@Bean
-	public EhCacheManagerFactoryBean ehCacheCacheManager() {
-		EhCacheManagerFactoryBean factory = new EhCacheManagerFactoryBean();
-		factory.setConfigLocation(new ClassPathResource("ehcache.xml"));
-		factory.setShared(true);
-		return factory;
-	}
 
 	@Override
 	public void setEnvironment(Environment environment) {

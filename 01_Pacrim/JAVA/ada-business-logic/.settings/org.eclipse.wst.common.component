@@ -9,7 +9,7 @@
         <dependent-module archiveName="ada-security-model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ada-security-model/ada-security-model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="org.ada.core-ada-utils-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ada-utils/ada-utils">
+        <dependent-module archiveName="ada-utils-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ada-utils/ada-utils">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="ada-business-logic"/>
