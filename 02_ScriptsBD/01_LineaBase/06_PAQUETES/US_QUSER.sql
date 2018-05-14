@@ -39,6 +39,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QUSER IS
     (
         p_nombre_usuario               IN  US_TUSER.USER_ALAS%type,
         p_password_usuario             IN  US_TUSER.USER_PSWD%type,
+        p_id_usuario                   OUT US_TUSER.USER_USER%type,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     );
  
@@ -107,10 +108,10 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QUSER IS
           
         IF(r_usuario.USER_USER IS NOT NULL) THEN
           p_log_usuario := TRUE;
-          p_cod_rta     := 'login exitoso';
+          p_cod_rta     := 'OK';
         ELSE
           p_log_usuario := FALSE;
-          p_cod_rta     := 'usuario o password equivocados';
+          p_cod_rta     := 'ER_NULLL';
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
@@ -131,6 +132,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QUSER IS
     (
         p_nombre_usuario               IN  US_TUSER.USER_ALAS%type,
         p_password_usuario             IN  US_TUSER.USER_PSWD%type,
+        p_id_usuario                   OUT US_TUSER.USER_USER%type,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     )IS
 
@@ -159,9 +161,10 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QUSER IS
             p_nombre_usuario,
             p_password_usuario
           );
-           p_cod_rta     := 'creacion de usuario exitosa';
+           p_id_usuario  := v_secuencia;
+           p_cod_rta     := 'OK';
         ELSE
-           p_cod_rta     := 'el usuario ya existe';
+           p_cod_rta     := 'ER_NULL';
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
@@ -204,12 +207,14 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QUSER IS
           
         IF(r_usuario.USER_USER IS NOT NULL) THEN
           p_id_usuario  :=  r_usuario.USER_USER;
-          p_cod_rta     := 'busqueda exitosa';
+          p_cod_rta     := 'OK';
         ELSE
-          p_cod_rta     := 'no se encontro el nombre de usuario';
+          p_id_usuario  := NULL;
+          p_cod_rta     := 'ER_NULL';
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
+                p_id_usuario  := NULL;
                 p_cod_rta  := 'ERROR_NC';
         
     END buscarUsuarioPorNombre;
@@ -248,12 +253,11 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QUSER IS
             UPDATE 
                 FS_PCRM_US.US_TUSER
             SET 
-                USER_ALAS = p_nombre_usuario_act, 
                 USER_PSWD = p_password_usuario_act
             WHERE 
                 USER_USER = v_id_usuario;
 
-              p_cod_rta     := 'actualizacion exitosa';
+              p_cod_rta     := 'OK';
         ELSE
               p_cod_rta     := v_cod_rta_tipo;
         END IF;

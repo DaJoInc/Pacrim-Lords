@@ -1,10 +1,10 @@
 prompt
-prompt PACKAGE: US_QVAEMNE
+prompt PACKAGE: EM_QVAFEMTE
 prompt
-CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVAEMNE IS
+CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QVAFEMTE IS
     --
     -- ===========================================================
-    -- US_QVAEMNE
+    -- EM_QVAFEMTE
     -- -----------------------------------------------------------
     -- validador de existencia de roll
     -- ===========================================================
@@ -15,7 +15,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVAEMNE IS
     --
     -- Versión        GAP                Solicitud        Fecha        Realizó            Descripción
     -- -----------    -------------    -------------    ----------    -------------    ------------------------------------------------------------------------------------------------------------------------------------------
-    -- 
+    -- EM_QVATPEM
     -- -----------    -------------    -------------    ----------    -------------    ------------------------------------------------------------------------------------------------------------------------------------------
 
     -- ============================================================
@@ -27,25 +27,24 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVAEMNE IS
     -- Declaracion de PROCEDIMIENTOS y FUNCIONES
     -- ============================================================
     
-    PROCEDURE validarNombreEmps
+    PROCEDURE validarEmprTpNe
     (
-        p_nombre_emprsa                IN  EM_TEMNE.EMNE_NOBE%type,
-        p_nit_emprsa                   IN  EM_TEMNE.EMNE_NITE%type,
-        p_existencia_emps              OUT BOOLEAN,
+        p_emne_emne                    IN  EM_TEMNE.EMNE_EMNE%type,
+        p_tpem_tpem                    IN  EM_TTPEM.TPEM_TPEM%type,
+        p_existencia_rolus             OUT BOOLEAN,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     ); 
-
-----------------------------------------------------------
     
-END US_QVAEMNE;
+    
+END EM_QVAFEMTE;
 /
 
 
 prompt
-prompt PACKAGE BODY:US_QVAEMNE
+prompt PACKAGE BODY:EM_QVAFEMTE
 prompt
 
-CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QVAEMNE IS
+CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QVAFEMTE IS
 
 
     --
@@ -53,50 +52,50 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QVAEMNE IS
     --
     
     -- ===========================================================
-    -- PROCEDURE validarNombreEmps
+    -- PROCEDURE validarTipoEmps
     -- -----------------------------------------------------------
     -- validar existencia de roll
     -- ===========================================================
-   PROCEDURE validarNombreEmps
+    PROCEDURE validarEmprTpNe
     (
-        p_nombre_emprsa                IN  EM_TEMNE.EMNE_NOBE%type,
-        p_nit_emprsa                   IN  EM_TEMNE.EMNE_NITE%type,
-        p_existencia_emps              OUT BOOLEAN,
+        p_emne_emne                    IN  EM_TEMNE.EMNE_EMNE%type,
+        p_tpem_tpem                    IN  EM_TTPEM.TPEM_TPEM%type,
+        p_existencia_rolus             OUT BOOLEAN,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     )IS
         
-        CURSOR c_empresa IS
-        SELECT
-            emne_emne
-        FROM
-            em_temne
-        WHERE
-            emne_nobe = p_nombre_emprsa,
-            emne_nite = p_nit_emprsa;
+        CURSOR c_fem_empre IS
+            SELECT
+                emte_emte
+            FROM
+                em_temte
+            WHERE 
+                emte_tpem = p_tpem_tpem  AND
+                emte_emne = p_emne_emne;
 
-            r_empresa c_empresa%rowtype;
+            r_fem_empre c_fem_empre%rowtype;
         
     BEGIN
       
-        OPEN  c_empresa;
-        FETCH c_empresa INTO r_empresa;
-        CLOSE c_empresa;
+        OPEN  c_fem_empre;
+        FETCH c_fem_empre INTO r_fem_empre;
+        CLOSE c_fem_empre;
         
-        IF(r_empresa.emne_emne IS NULL) then
+        IF(r_fem_empre.emte_emte IS NULL) then
         
-            p_existencia_emps := TRUE;
+            p_existencia_rolus := TRUE;
             p_cod_rta         := 'OK';
             
         ELSE
-            p_existencia_emps := FALSE;
+            p_existencia_rolus := FALSE;
             p_cod_rta         := 'ER_EMP_NUL';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            p_existencia_emps := FALSE;
+            p_existencia_rolus := FALSE;
             p_cod_rta         := 'ERROR_NC';
         
-    END validarNombreEmps;
+    END validarEmprTpNe;
     
-END US_QVAEMNE;
+END EM_QVAFEMTE;
 /

@@ -30,14 +30,14 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QATPEM IS
     PROCEDURE crearTpEmpresa
     (
         p_tp_emprsa             IN  EM_TTPEM.TPEM_DTEM%type,
-        p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
+        p_id_tp_emprsa          OUT EM_TTPEM.TPEM_TPEM%type,
+        p_cod_rta               OUT NE_TCRTA.CRTA_CRTA%type
     );
  
-  PROCEDURE buscarEmpPorTpEmp
+  PROCEDURE buscarTipoNeg
     (
-        p_tp_emprsa             IN  EM_TTPEM.TPEM_DTEM%type,
-       
-        p_id_tpem                   OUT EM_TTPEM.tpem_tpem%type,
+        p_tp_emprsa                 IN  EM_TTPEM.TPEM_DTEM%type,
+        p_id_tpem                   OUT EM_TTPEM.TPEM_TPEM%type,
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     ); 
     
@@ -74,17 +74,19 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QATPEM IS
     PROCEDURE crearTpEmpresa
     (
         p_tp_emprsa             IN  EM_TTPEM.TPEM_DTEM%type,
-        p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
+        p_id_tp_emprsa          OUT EM_TTPEM.TPEM_TPEM%type,
+        p_cod_rta               OUT NE_TCRTA.CRTA_CRTA%type
     )IS
 
         v_existencia_tp_emprs   BOOLEAN;
         v_secuencia             NUMBER;
         v_cod_rta_tipo          NE_TCRTA.CRTA_CRTA%type;
+        v_id_tp_emprsa          EM_TEMNE.EMNE_EMNE%type;
 
     BEGIN  
         v_secuencia := SEM_TTPEM.NextVal;
 
-        US_QVATPEM.validarTipoEmps
+        EM_QVATPEM.validarTipoEmps
         (
             p_tp_emprsa,
             v_existencia_tp_emprs,
@@ -107,13 +109,17 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QATPEM IS
                 null
             );
            p_cod_rta     := 'OK';
+           v_id_tp_emprsa := v_secuencia;
+           p_id_tp_emprsa := v_id_tp_emprsa;
+           
         ELSE
            p_cod_rta     := 'EMP_EXI_NE';
+           p_id_tp_emprsa := null;
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
                 p_cod_rta  := 'ERROR_NC';
-        
+                p_id_tp_emprsa := null;
     END crearTpEmpresa;
 
     --
@@ -126,10 +132,10 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QATPEM IS
     -- insersion type table core en type table web de roles y 
     -- modulos
     -- ===========================================================
-    PROCEDURE buscarEmpPorTpEmp
+    PROCEDURE buscarTipoNeg
     (
         p_tp_emprsa           IN  EM_TTPEM.TPEM_DTEM%type,
-        p_id_tpem             OUT EM_TTPEM.tpem_tpem%type,
+        p_id_tpem             OUT EM_TTPEM.TPEM_TPEM%type,
         p_cod_rta             OUT NE_TCRTA.CRTA_CRTA%type
     )IS
 
@@ -162,7 +168,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QATPEM IS
         WHEN OTHERS THEN
             p_cod_rta  := 'ERROR_NC';
     
-    END buscarEmpPorTpEmp;
+    END buscarTipoNeg;
     --
     -- #VERSION:0000001000
     --
@@ -187,7 +193,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QATPEM IS
 
     BEGIN  
 
-        EM_QATPEM.buscarEmpPorTpEmp
+        EM_QATPEM.buscarTipoNeg
         (
             p_nom_tpemprsa, 
             v_id_tpem,
@@ -196,7 +202,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QATPEM IS
 
         IF(v_id_tpem IS NOT NULL) THEN
         
-            US_QVATPEM.validarTipoEmps
+            EM_QVATPEM.validarTipoEmps
             (
                 p_n_nom_tpemprsa,
                 v_existencia_tp_emprs,

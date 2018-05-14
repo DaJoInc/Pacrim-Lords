@@ -4,8 +4,8 @@ REM Realizado por : TheOverLordKotan
 REM Base de Datos : FS_PCRM_US
 REM ******************************************************************
 
-CREATE INDEX "IXFK_US_TPUSR_US_TPSNE"   
- ON  "FS_PCRM_US"."US_TPUSR" ("PSNE_PSNE") 
+CREATE INDEX "IXFK_US_TPUSR_US_TPSNA"   
+ ON  "FS_PCRM_US"."US_TPUSR" ("PUSR_PSNA") 
 TABLESPACE	TS_IPACRIM
   pctfree 10
   initrans 2
@@ -19,8 +19,8 @@ TABLESPACE	TS_IPACRIM
   );
   
   
-CREATE INDEX "IXFK_US_TPUSR_US_TRLNE"   
- ON  "FS_PCRM_US"."US_TPUSR" ("PSNE_RLNE") 
+CREATE INDEX "IXFK_US_TPUSR_US_TROLL"   
+ ON  "FS_PCRM_US"."US_TPUSR" ("PUSR_ROLL") 
 TABLESPACE	TS_IPACRIM
   pctfree 10
   initrans 2
@@ -33,8 +33,8 @@ TABLESPACE	TS_IPACRIM
     maxextents unlimited
   );
   
-CREATE INDEX "IXFK_US_TPUSR_US_TUSNE"   
- ON  "FS_PCRM_US"."US_TPUSR" ("PSNE_USNE") 
+CREATE INDEX "IXFK_US_TPUSR_US_TUSER"   
+ ON  "FS_PCRM_US"."US_TPUSR" ("PUSR_USER") 
 TABLESPACE	TS_IPACRIM
   pctfree 10
   initrans 2

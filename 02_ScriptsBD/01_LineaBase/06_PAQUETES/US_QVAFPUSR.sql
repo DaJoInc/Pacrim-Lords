@@ -1,10 +1,10 @@
 prompt
-prompt PACKAGE: US_QVATPEM
+prompt PACKAGE: US_QVAFPUSR
 prompt
-CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVATPEM IS
+CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVAFPUSR IS
     --
     -- ===========================================================
-    -- US_QVATPEM
+    -- US_QVAFPUSR
     -- -----------------------------------------------------------
     -- validador de existencia de roll
     -- ===========================================================
@@ -27,24 +27,25 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVATPEM IS
     -- Declaracion de PROCEDIMIENTOS y FUNCIONES
     -- ============================================================
     
-    PROCEDURE validarTipoEmps
+    PROCEDURE validarUserRolSys
     (
-        p_tp_emprsa                    IN  EM_TTPEM.TPEM_DTEM%type,
-        p_existencia_tptpem            OUT BOOLEAN,
+        p_id_usuario                   IN  US_TUSER.USER_USER%type,
+        p_id_roll                      IN  US_TROLL.ROLL_ROLL%type,
+        p_id_persona                   IN  US_TPSNA.PSNA_PSNA%type,
+        p_existencia_rolus             OUT BOOLEAN,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     ); 
-
-----------------------------------------------------------
     
-END US_QVATPEM;
+    
+END US_QVAFPUSR;
 /
 
 
 prompt
-prompt PACKAGE BODY:US_QVATPEM
+prompt PACKAGE BODY:US_QVAFPUSR
 prompt
 
-CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QVATPEM IS
+CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QVAFPUSR IS
 
 
     --
@@ -56,44 +57,48 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QVATPEM IS
     -- -----------------------------------------------------------
     -- validar existencia de roll
     -- ===========================================================
-    PROCEDURE validarTipoEmps
+    PROCEDURE validarUserRolSys
     (
-        p_tp_emprsa                    IN  EM_TTPEM.TPEM_DTEM%type,
-        p_existencia_tptpem            OUT BOOLEAN,
+        p_id_usuario                   IN  US_TUSER.USER_USER%type,
+        p_id_roll                      IN  US_TROLL.ROLL_ROLL%type,
+        p_id_persona                   IN  US_TPSNA.PSNA_PSNA%type,
+        p_existencia_rolus             OUT BOOLEAN,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     )IS
         
-        CURSOR c_tp_empresa IS
+        CURSOR c_fu_usuario IS
             SELECT
-                tpem_tpem
+                pusr_pusr
             FROM
-                em_ttpem
+                us_tpusr
             WHERE 
-              tpem_dtem= p_tp_emprsa;
+               pusr_user = p_id_usuario AND
+               pusr_roll = p_id_roll   AND
+               pusr_psna = p_id_persona;
 
-            r_tp_empresa c_tp_empresa%rowtype;
+            r_fu_usuario c_fu_usuario%rowtype;
         
     BEGIN
       
-        OPEN  c_tp_empresa;
-        FETCH c_tp_empresa INTO r_tp_empresa;
-        CLOSE c_tp_empresa;
+        OPEN  c_fu_usuario;
+        FETCH c_fu_usuario INTO r_fu_usuario;
+        CLOSE c_fu_usuario;
         
-        IF(r_tp_empresa.tpem_tpem IS NULL) then
+        IF(r_fu_usuario.pusr_pusr IS NULL) then
         
-            p_existencia_tptpem := TRUE;
+            p_existencia_rolus := TRUE;
             p_cod_rta         := 'OK';
             
         ELSE
-            p_existencia_tptpem := FALSE;
+            p_existencia_rolus := FALSE;
             p_cod_rta         := 'ER_EMP_NUL';
         END IF;
     EXCEPTION
         WHEN OTHERS THEN
-            p_existencia_tptpem := FALSE;
+            p_existencia_rolus := FALSE;
             p_cod_rta         := 'ERROR_NC';
         
-    END validarTipoEmps;
+    END validarUserRolSys;
     
-END US_QVATPEM;
+END US_QVAFPUSR;
 /

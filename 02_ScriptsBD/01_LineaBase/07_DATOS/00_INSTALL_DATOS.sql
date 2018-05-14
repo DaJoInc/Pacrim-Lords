@@ -9,8 +9,8 @@ PROMPT EM_TEMTE.sql...
 @@EM_TEMTE.sql
 
 
-PROMPT US_TTPRL.sql..
-@@US_TTPRL.sql
+PROMPT US_TROLL.sql..
+@@US_TROLL.sql
 
 
 
@@ -18,8 +18,7 @@ PROMPT NE_TTPNE.sql...
 @@NE_TTPNE.sql
 
 
-PROMPT NE_TEMUS.sql...
-@@NE_TEMUS.sql
+
 
 
 PROMPT NE_TTPPV.sql...
@@ -65,7 +64,11 @@ PROMPT NE_TCLNE.sql...
 PROMPT NE_TTRPR.sql...
 @@NE_TTRPR.sql
 
+PROMPT NE_TSTNE.sql...
+@@NE_TSTNE.sql
 
+PROMPT NE_TEMUS.sql...
+@@NE_TEMUS.sql
 
 
 

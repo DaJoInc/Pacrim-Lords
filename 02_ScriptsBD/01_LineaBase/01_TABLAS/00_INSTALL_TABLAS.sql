@@ -60,20 +60,19 @@ PROMPT NE_TTRPR.sql...
 PROMPT NE_TTSTC.sql...
 @@NE_TTSTC.sql
 
-
-PROMPT US_TRLNE.sql..
-@@US_TRLNE.sql
-
-PROMPT US_TUSNE.sql...
-@@US_TUSNE.sql
-
-PROMPT US_TPSNE.sql...
-@@US_TPSNE.sql
-
-
-
-PROMPT US_TPUSRUS_TPUSRUS_TPUSRUS_TPUSR.sql...
-@@US_TPUSR.sql
-
 PROMPT NE_TCRTA.sql...
 @@NE_TCRTA.sql
+
+PROMPT US_TROLL.sql..
+@@US_TROLL.sql
+
+
+PROMPT US_TPSNA.sql...
+@@US_TPSNA.sql
+
+PROMPT US_TUSER.sql...
+@@US_TUSER.sql
+
+PROMPT US_TPUSR.sql...
+@@US_TPUSR.sql
+

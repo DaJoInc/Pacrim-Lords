@@ -31,10 +31,11 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QAEMNE IS
     (
         p_nombre_emprsa             IN  EM_TEMNE.EMNE_NOBE%type,
         p_nit_emprsa                IN  EM_TEMNE.EMNE_NITE%type,
+        p_id_emprsa                 OUT EM_TEMNE.EMNE_EMNE%type,
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     );
  
-  PROCEDURE buscarEmpPorNoNit
+    PROCEDURE buscarEmpPorNoNit
     (
         p_nombre_emprsa             IN  EM_TEMNE.EMNE_NOBE%type,
         p_nit_emprsa                IN  EM_TEMNE.EMNE_NITE%type,
@@ -76,6 +77,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QAEMNE IS
     (
         p_nombre_emprsa             IN  EM_TEMNE.EMNE_NOBE%type,
         p_nit_emprsa                IN  EM_TEMNE.EMNE_NITE%type,
+        p_id_emprsa                 OUT EM_TEMNE.EMNE_EMNE%type,
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     )IS
 
@@ -86,7 +88,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QAEMNE IS
     BEGIN  
         v_secuencia := SEM_TEMNE.NextVal;
 
-        US_QVAEMNE.validarNombreEmps
+        EM_QVAEMNE.validarNombreEmps
         (
             p_nombre_emprsa,
             p_nit_emprsa,
@@ -109,11 +111,14 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QAEMNE IS
                 null
             );
            p_cod_rta     := 'OK';
+           p_id_emprsa := v_secuencia;
         ELSE
            p_cod_rta     := 'EMP_EXI_NE';
+           p_id_emprsa := null;
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
+                p_id_emprsa := null;
                 p_cod_rta  := 'ERROR_NC';
         
     END crearEmpresa;
@@ -198,7 +203,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QAEMNE IS
         );
 
         IF(v_id_emne IS NOT NULL) THEN
-            US_QVAEMNE.validarNombreEmps
+            EM_QVAEMNE.validarNombreEmps
             (
                 p_n_nombre_emprsa,
                 p_n_nit_emprsa,
@@ -209,8 +214,8 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QAEMNE IS
                 
                 UPDATE em_temne
                 SET
-                    emne_nobe =p_nombre_emprsa,
-                    emne_nite =p_nit_emprsa,
+                    emne_nobe =p_n_nombre_emprsa,
+                    emne_nite =p_n_nit_emprsa,
                     emne_femo = SYSDATE
                 WHERE
                     emne_emne = v_id_emne;

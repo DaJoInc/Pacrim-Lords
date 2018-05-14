@@ -36,6 +36,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QPSNA IS
         p_telefono_persona          IN  US_TPSNA.PSNA_TLFN%type,
         p_email_persona             IN  US_TPSNA.PSNA_EMAL%type,
         p_pais_persona              IN  US_TPSNA.PSNA_PAIS%type,
+        p_id_persona                OUT US_TPSNA.PSNA_PSNA%type,
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     );
  
@@ -46,7 +47,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QPSNA IS
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     ); 
     
-  PROCEDURE actualizarPersona
+    PROCEDURE actualizarPersona
     (
         p_documento_persona         IN  US_TPSNA.PSNA_NRID%type,
         p_documento_persona_act     IN  US_TPSNA.PSNA_NRID%type,
@@ -71,7 +72,7 @@ prompt
 
 CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
   
-     --
+    --
     -- #VERSION:0000001000
     --
     
@@ -89,6 +90,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
         p_telefono_persona          IN  US_TPSNA.PSNA_TLFN%type,
         p_email_persona             IN  US_TPSNA.PSNA_EMAL%type,
         p_pais_persona              IN  US_TPSNA.PSNA_PAIS%type,
+        p_id_persona                OUT US_TPSNA.PSNA_PSNA%type,
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     )IS
 
@@ -99,9 +101,10 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
     BEGIN  
         v_secuencia := US_SETPSNA.NextVal;
 
-        US_QVPSNA.validarPersonaPordocumento
+        US_QVPSNA.validarPersonaPorDoctEmail
         (
             p_documento_persona,
+            p_email_persona,
             v_existencia_persona,
             v_cod_rta_tipo
         );
@@ -127,9 +130,10 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
             p_email_persona,
             p_pais_persona     
           );
-           p_cod_rta     := 'creacion de PSNA exitosa';
+           p_id_persona  := v_secuencia;
+           p_cod_rta     := 'OK';
         ELSE
-           p_cod_rta     := 'el PSNA ya existe';
+           p_cod_rta     := 'ER_NULL';
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
@@ -171,9 +175,9 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
           
         IF(r_persona.PSNA_PSNA IS NOT NULL) THEN
           p_id_persona  :=  r_persona.PSNA_PSNA;
-          p_cod_rta     := 'busqueda exitosa';
+          p_cod_rta     := 'OK';
         ELSE
-          p_cod_rta     := 'no se encontro el documento de PSNA';
+          p_cod_rta     := 'ER_NULL';
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
@@ -204,6 +208,8 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
     
         v_id_persona                US_TPSNA.PSNA_PSNA%type;
         v_cod_rta_tipo              NE_TCRTA.CRTA_CRTA%type;
+        v_cod_vlrta_tipo              NE_TCRTA.CRTA_CRTA%type;
+        v_existencia_persona          BOOLEAN;
 
     BEGIN  
 
@@ -213,8 +219,16 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
             v_id_persona,
             v_cod_rta_tipo                      
         );
+        
+        US_QVPSNA.validarPersonaPorDoctEmail
+        (
+            p_documento_persona_act,
+            p_email_persona_act,            
+            v_existencia_persona,
+            v_cod_vlrta_tipo                      
+        );
 
-        IF(v_id_persona IS NOT NULL) THEN
+        IF(v_id_persona IS NOT NULL AND v_existencia_persona) THEN
 
             UPDATE 
                 FS_PCRM_US.US_TPSNA
@@ -229,7 +243,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QPSNA IS
             WHERE 
                 PSNA_PSNA = v_id_persona;
 
-              p_cod_rta     := 'actualizacion exitosa';
+              p_cod_rta     := 'OK';
         ELSE
               p_cod_rta     := v_cod_rta_tipo;
         END IF;

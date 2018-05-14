@@ -30,6 +30,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QROLL IS
   PROCEDURE crearRoll
     (
         p_nombre_roll               IN  US_TROLL.ROLL_RLDN%type,
+        p_id_roll                   OUT US_TROLL.ROLL_ROLL%type,
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     );
  
@@ -71,6 +72,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QROLL IS
     PROCEDURE crearRoll
     (
         p_nombre_roll               IN  US_TROLL.ROLL_RLDN%type,
+        p_id_roll                   OUT US_TROLL.ROLL_ROLL%type,
         p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type
     )IS
 
@@ -99,9 +101,10 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QROLL IS
             p_nombre_roll,
             sysdate
           );
-           p_cod_rta     := 'creacion de roll exitosa';
+           p_id_roll     := v_secuencia;
+           p_cod_rta     := 'OK';
         ELSE
-           p_cod_rta     := 'el roll ya existe';
+           p_cod_rta     := 'ER_NULL';
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
@@ -144,12 +147,14 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QROLL IS
           
         IF(r_roll.ROLL_ROLL IS NOT NULL) THEN
           p_id_roll  :=  r_roll.ROLL_ROLL;
-          p_cod_rta     := 'busqueda exitosa';
+          p_cod_rta     := 'OK';
         ELSE
-          p_cod_rta     := 'no se encontro el nombre de roll';
+          p_id_roll  := NULL;
+          p_cod_rta     := 'ER_NULL';
         END IF;
         EXCEPTION
             WHEN OTHERS THEN
+                p_id_roll  := NULL;
                 p_cod_rta  := 'ERROR_NC';
         
     END buscarRollPorNombre;
@@ -192,7 +197,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QROLL IS
             WHERE 
                 ROLL_ROLL = v_id_roll;
 
-              p_cod_rta     := 'actualizacion exitosa';
+              p_cod_rta     := 'OK';
         ELSE
               p_cod_rta     := v_cod_rta_tipo;
         END IF;

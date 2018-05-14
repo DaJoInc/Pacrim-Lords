@@ -1,12 +1,12 @@
 prompt
-prompt PACKAGE: US_QVUSER
+prompt PACKAGE: EM_QVAEMNE
 prompt
-CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVUSER IS
+CREATE OR REPLACE PACKAGE FS_PCRM_US.EM_QVAEMNE IS
     --
     -- ===========================================================
-    -- US_QVUSER
+    -- EM_QVAEMNE
     -- -----------------------------------------------------------
-    -- validador de existencia de usuario
+    -- validador de existencia de roll
     -- ===========================================================
     --
     -- #VERSION:0000001000
@@ -27,24 +27,25 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QVUSER IS
     -- Declaracion de PROCEDIMIENTOS y FUNCIONES
     -- ============================================================
     
-    PROCEDURE validarUsuarioPorNombre
+    PROCEDURE validarNombreEmps
     (
-        p_nombre_usuario               IN  US_TUSER.USER_ALAS%type,
-        p_existencia_usuario           OUT BOOLEAN,
+        p_nombre_emprsa                IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa                   IN  EM_TEMNE.EMNE_NITE%type,
+        p_existencia_emps              OUT BOOLEAN,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     ); 
 
 ----------------------------------------------------------
     
-END US_QVUSER;
+END EM_QVAEMNE;
 /
 
 
 prompt
-prompt PACKAGE BODY:US_QVUSER
+prompt PACKAGE BODY:EM_QVAEMNE
 prompt
 
-CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QVUSER IS
+CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.EM_QVAEMNE IS
 
 
     --
@@ -52,48 +53,63 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QVUSER IS
     --
     
     -- ===========================================================
-    -- PROCEDURE validarUsuarioPorNombre
+    -- PROCEDURE validarNombreEmps
     -- -----------------------------------------------------------
-    -- validar existencia de usuario
+    -- validar existencia de roll
     -- ===========================================================
-    PROCEDURE validarUsuarioPorNombre
+   PROCEDURE validarNombreEmps
     (
-        p_nombre_usuario               IN  US_TUSER.USER_ALAS%type,
-        p_existencia_usuario           OUT BOOLEAN,
+        p_nombre_emprsa                IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa                   IN  EM_TEMNE.EMNE_NITE%type,
+        p_existencia_emps              OUT BOOLEAN,
         p_cod_rta                      OUT NE_TCRTA.CRTA_CRTA%type
     )IS
         
-        CURSOR c_usuario IS
-			SELECT
-				USER_ALAS
-			FROM
-				FS_PCRM_US.US_TUSER
-            WHERE
-                USER_ALAS = p_nombre_usuario;
+        CURSOR c_empresa IS
+        SELECT
+            emne_emne
+        FROM
+            em_temne
+        WHERE
+            emne_nobe = p_nombre_emprsa;
+            
+        CURSOR c_empresa_nit IS
+        SELECT
+            emne_emne
+        FROM
+            em_temne
+        WHERE
+            emne_nite = p_nit_emprsa;
 
-			r_usuario c_usuario%rowtype;
+            r_empresa     c_empresa%rowtype;
+            r_empresa_nit c_empresa_nit%rowtype;
         
     BEGIN
       
-        OPEN  c_usuario;
-        FETCH c_usuario INTO r_usuario;
-        CLOSE c_usuario;
+        OPEN  c_empresa;
+        FETCH c_empresa INTO r_empresa;
+        CLOSE c_empresa;
+
+        OPEN  c_empresa_nit;
+        FETCH c_empresa_nit INTO r_empresa_nit;
+        CLOSE c_empresa_nit;
         
-        IF(r_usuario.USER_ALAS IS NULL) then
+        IF(r_empresa.emne_emne IS NULL AND r_empresa_nit.emne_emne IS NULL) then
         
-			p_existencia_usuario := TRUE;
-            p_cod_rta            := 'OK';
+            p_existencia_emps := TRUE;
+            p_cod_rta         := 'OK';
             
         ELSE
-            p_existencia_usuario := FALSE;
-            p_cod_rta            := 'ER_EMP_NUL';
+            p_existencia_emps := FALSE;
+            p_cod_rta         := 'ER_EMP_NUL';
         END IF;
+        
     EXCEPTION
         WHEN OTHERS THEN
-            p_existencia_usuario := FALSE;
-            p_cod_rta            := 'ERROR_NC';
+            p_existencia_emps := FALSE;
+            p_cod_rta         := 'ERROR_NC';
         
-    END validarUsuarioPorNombre;
+    END validarNombreEmps;
     
-END US_QVUSER;
+END EM_QVAEMNE;
 /
