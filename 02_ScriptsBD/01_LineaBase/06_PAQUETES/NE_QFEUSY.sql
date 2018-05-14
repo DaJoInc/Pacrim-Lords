@@ -37,9 +37,40 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.NE_QFEUSY IS
         p_tt_usemsy               OUT NE_QFEUSY.TT_USEMSY,
         p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
     );
-
     
+    PROCEDURE registrarUsEmNego
+    (
+        p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+        p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+        p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+        p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+        p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+        p_id_ussy                 OUT NE_TEMUS.EMUS_EMUS%type,
+        p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
+    );
 
+    PROCEDURE inactivarUsEmSy
+    (
+        p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+        p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+        p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+        p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+        p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+        p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
+    );
+
+    PROCEDURE activarUsEmSy
+    (
+        p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+        p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+        p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+        p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+        p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+        p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
+    );
     -- ============================================================
     -- Declaracion de Cursores
     -- ============================================================
@@ -278,7 +309,384 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.NE_QFEUSY IS
             
     END obtenerUsEmSy;
 
-   
+    -- ===========================================================
+    -- PROCEDURE registrarUsEmNego
+    -- -----------------------------------------------------------
+    -- obtiene el id de el usuario persona rol 
+    -- ===========================================================
+    PROCEDURE registrarUsEmNego
+    (
+        p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+        p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+        p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+        p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+        p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+        p_id_ussy                 OUT NE_TEMUS.EMUS_EMUS%type,
+        p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
+    )IS
+
+        CURSOR c_fu_ina 
+        (
+            pc_stne_dene NE_TSTNE.STNE_DENE%type
+        )IS
+        SELECT
+            stne_stne
+        FROM
+            ne_tstne
+        WHERE 
+            stne_dene = pc_stne_dene;
+
+        r_fu_ina c_fu_ina%rowtype;
+        
+
+        v_id_emte_emte          EM_TEMTE.EMTE_EMTE%type;
+        v_id_emne_emne          EM_TEMNE.EMNE_EMNE%type;
+        v_id_tpem_tpem          EM_TTPEM.TPEM_TPEM%type;
+        v_id_uspero             US_TPUSR.PUSR_PUSR%type;
+        v_id_rol                US_TROLL.ROLL_ROLL%type;
+        v_id_user               US_TUSER.USER_USER%type;
+        v_id_psna               US_TPSNA.PSNA_PSNA%type;
+        v_id_persona            US_TPSNA.PSNA_PSNA%type;
+        v_id_emus               NE_TEMUS.EMUS_EMUS%type;
+        v_cod_rta_consluser     NE_TCRTA.CRTA_CRTA%type;
+        v_cod_rta_consutemp     NE_TCRTA.CRTA_CRTA%type;
+        v_cod_rta_persona       NE_TCRTA.CRTA_CRTA%type;
+        v_cod_rta_vlperem       NE_TCRTA.CRTA_CRTA%type;
+        vc_stne_dene            NE_TSTNE.STNE_DENE%type;
+        v_id_ussy               NE_TEMUS.EMUS_EMUS%type;
+        v_cod_rta               NE_TCRTA.CRTA_CRTA%type;
+        v_secuencia             NUMBER;
+        v_existencia_rolus      BOOLEAN;
+    BEGIN  
     
+        OPEN  c_fu_ina(ESTADO_ACTIVO_NEGO);
+        FETCH c_fu_ina INTO r_fu_ina;
+        CLOSE c_fu_ina;
+
+
+        
+        vc_stne_dene := r_fu_ina.STNE_STNE;
+    
+        US_QFEMTE.obtenerEmNeId
+        (
+            p_nombre_emprsa,
+            p_nit_emprsa   ,
+            p_tp_emprsa    ,
+            v_id_emte_emte ,
+            v_id_emne_emne ,
+            v_id_tpem_tpem ,
+            v_cod_rta_consutemp      
+        );
+        
+        US_QFPUSR.obtenerUsperoId
+        (
+            p_nombre_roll       ,
+            p_nombre_usuario    ,
+            p_documento_persona ,
+            v_id_uspero         ,
+            v_id_rol            ,
+            v_id_user           ,
+            v_id_psna           ,
+            v_cod_rta_consluser 
+        );
+          
+        IF(
+            v_cod_rta_consluser='OK'   AND 
+            v_cod_rta_consutemp='OK'   AND 
+            v_id_emte_emte IS NOT NULL AND
+            v_id_uspero IS NOT NULL    AND
+            vc_stne_dene IS NOT NULL               
+        )THEN
+        
+            NE_QVAEUSY.validarUserEmp
+            (
+                v_id_emte_emte    ,
+                v_id_uspero       ,
+                v_existencia_rolus,
+                v_cod_rta_vlperem         
+            );
+            
+            IF  (v_existencia_rolus) THEN
+                v_secuencia := SNE_TEMUS.NextVal;
+                INSERT INTO ne_temus (
+                    emus_emus,
+                    emus_emte,
+                    emus_stne,
+                    emus_pusr
+                ) VALUES (
+                    v_secuencia,
+                    v_id_emte_emte,
+                    vc_stne_dene,
+                    v_id_uspero
+                );
+                v_id_ussy := v_secuencia;
+                v_cod_rta   := 'OK';
+            ELSE
+                v_id_ussy := NULL;
+                v_cod_rta   := 'ER_USNE_EXIT';
+            END IF;
+            
+        ELSE
+            v_cod_rta   := 'ER_USER_NE';
+        END if;
+        p_id_ussy := v_id_ussy;
+        p_cod_rta:=v_cod_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_id_ussy := NULL;
+            
+    END registrarUsEmNego;    
+    
+    -- ===========================================================
+    -- PROCEDURE inactivarUsEmSy
+    -- -----------------------------------------------------------
+    -- obtiene el id de el usuario persona rol 
+    -- ===========================================================
+    PROCEDURE inactivarUsEmSy
+    (
+        p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+        p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+        p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+        p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+        p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+        p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
+    )IS
+
+        CURSOR c_fu_ina 
+        (
+            pc_stne_dene NE_TSTNE.STNE_DENE%type
+        )IS
+        SELECT
+            stne_stne
+        FROM
+            ne_tstne
+        WHERE 
+            stne_dene = pc_stne_dene;
+
+        r_fu_ina c_fu_ina%rowtype;
+        
+        CURSOR c_fenus 
+        (
+            pc_id_emte_emte    EM_TEMTE.EMTE_EMTE%type,
+            pc_id_uspero       US_TPUSR.PUSR_PUSR%type
+        )IS
+            SELECT
+                emus_emus
+            FROM
+                ne_temus
+            WHERE 
+                emus_emte = pc_id_emte_emte AND
+                emus_pusr = pc_id_uspero;
+
+        r_fenus c_fenus%rowtype;
+
+        v_id_emte_emte          EM_TEMTE.EMTE_EMTE%type;
+        v_id_emne_emne          EM_TEMNE.EMNE_EMNE%type;
+        v_id_tpem_tpem          EM_TTPEM.TPEM_TPEM%type;
+        v_id_uspero             US_TPUSR.PUSR_PUSR%type;
+        v_id_rol                US_TROLL.ROLL_ROLL%type;
+        v_id_user               US_TUSER.USER_USER%type;
+        v_id_psna               US_TPSNA.PSNA_PSNA%type;
+        v_id_persona            US_TPSNA.PSNA_PSNA%type;
+        v_id_emus               NE_TEMUS.EMUS_EMUS%type;
+        v_cod_rta_consluser     NE_TCRTA.CRTA_CRTA%type;
+        v_cod_rta_consutemp     NE_TCRTA.CRTA_CRTA%type;
+        v_cod_rta_persona       NE_TCRTA.CRTA_CRTA%type;
+        vc_stne_dene            NE_TSTNE.STNE_DENE%type;
+    BEGIN  
+    
+        OPEN  c_fu_ina(ESTADO_INACTIVO_NEGO);
+        FETCH c_fu_ina INTO r_fu_ina;
+        CLOSE c_fu_ina;
+
+
+        
+        vc_stne_dene := r_fu_ina.STNE_STNE;
+    
+        US_QFEMTE.obtenerEmNeId
+        (
+            p_nombre_emprsa,
+            p_nit_emprsa   ,
+            p_tp_emprsa    ,
+            v_id_emte_emte ,
+            v_id_emne_emne ,
+            v_id_tpem_tpem ,
+            v_cod_rta_consutemp      
+        );
+        
+        US_QFPUSR.obtenerUsperoId
+        (
+            p_nombre_roll       ,
+            p_nombre_usuario    ,
+            p_documento_persona ,
+            v_id_uspero         ,
+            v_id_rol            ,
+            v_id_user           ,
+            v_id_psna           ,
+            v_cod_rta_consluser 
+        );
+          
+        IF(
+            v_cod_rta_consluser='OK'   AND 
+            v_cod_rta_consutemp='OK'   AND 
+            v_id_emte_emte IS NOT NULL AND
+            v_id_uspero IS NOT NULL    AND
+            vc_stne_dene IS NOT NULL               
+        )THEN
+        
+                OPEN  c_fenus(v_id_emte_emte,v_id_uspero);
+                FETCH c_fenus INTO r_fenus;
+                CLOSE c_fenus;
+            IF  (r_fenus.emus_emus IS NOT NULL) THEN
+            
+                UPDATE NE_TEMUS
+                    SET
+                        emus_stne =vc_stne_dene
+                WHERE
+                    EMUS_EMUS =r_fenus.emus_emus;
+                
+                p_cod_rta   := 'OK';
+            ELSE
+
+                p_cod_rta   := 'ER_NOCES_US';
+            END IF;
+        
+        ELSE
+
+            p_cod_rta   := 'ER_USER_NE';
+        END if;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+            
+    END inactivarUsEmSy;
+
+   -- ===========================================================
+    -- PROCEDURE obtenerUsEmSy
+    -- -----------------------------------------------------------
+    -- obtiene el id de el usuario persona rol 
+    -- ===========================================================
+    PROCEDURE activarUsEmSy
+    (
+        p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+        p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+        p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+        p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+        p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+        p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+        p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
+    )IS
+
+        CURSOR c_fu_ina 
+        (
+            pc_stne_dene NE_TSTNE.STNE_DENE%type
+        )IS
+        SELECT
+            stne_stne
+        FROM
+            ne_tstne
+        WHERE 
+            stne_dene = pc_stne_dene;
+
+        r_fu_ina c_fu_ina%rowtype;
+        
+        CURSOR c_fenus 
+        (
+            pc_id_emte_emte    EM_TEMTE.EMTE_EMTE%type,
+            pc_id_uspero       US_TPUSR.PUSR_PUSR%type
+        )IS
+            SELECT
+                emus_emus
+            FROM
+                ne_temus
+            WHERE 
+                emus_emte = pc_id_emte_emte AND
+                emus_pusr = pc_id_uspero;
+
+        r_fenus c_fenus%rowtype;
+
+        v_id_emte_emte          EM_TEMTE.EMTE_EMTE%type;
+        v_id_emne_emne          EM_TEMNE.EMNE_EMNE%type;
+        v_id_tpem_tpem          EM_TTPEM.TPEM_TPEM%type;
+        v_id_uspero             US_TPUSR.PUSR_PUSR%type;
+        v_id_rol                US_TROLL.ROLL_ROLL%type;
+        v_id_user               US_TUSER.USER_USER%type;
+        v_id_psna               US_TPSNA.PSNA_PSNA%type;
+        v_id_persona            US_TPSNA.PSNA_PSNA%type;
+        v_id_emus               NE_TEMUS.EMUS_EMUS%type;
+        v_cod_rta_consluser     NE_TCRTA.CRTA_CRTA%type;
+        v_cod_rta_consutemp     NE_TCRTA.CRTA_CRTA%type;
+        v_cod_rta_persona       NE_TCRTA.CRTA_CRTA%type;
+        vc_stne_dene            NE_TSTNE.STNE_DENE%type;
+    BEGIN  
+    
+        OPEN  c_fu_ina(ESTADO_ACTIVO_NEGO);
+        FETCH c_fu_ina INTO r_fu_ina;
+        CLOSE c_fu_ina;
+
+
+        
+        vc_stne_dene := r_fu_ina.STNE_STNE;
+    
+        US_QFEMTE.obtenerEmNeId
+        (
+            p_nombre_emprsa,
+            p_nit_emprsa   ,
+            p_tp_emprsa    ,
+            v_id_emte_emte ,
+            v_id_emne_emne ,
+            v_id_tpem_tpem ,
+            v_cod_rta_consutemp      
+        );
+        
+        US_QFPUSR.obtenerUsperoId
+        (
+            p_nombre_roll       ,
+            p_nombre_usuario    ,
+            p_documento_persona ,
+            v_id_uspero         ,
+            v_id_rol            ,
+            v_id_user           ,
+            v_id_psna           ,
+            v_cod_rta_consluser 
+        );
+          
+        IF(
+            v_cod_rta_consluser='OK'   AND 
+            v_cod_rta_consutemp='OK'   AND 
+            v_id_emte_emte IS NOT NULL AND
+            v_id_uspero IS NOT NULL    AND
+            vc_stne_dene IS NOT NULL               
+        )THEN
+        
+                OPEN  c_fenus(v_id_emte_emte,v_id_uspero);
+                FETCH c_fenus INTO r_fenus;
+                CLOSE c_fenus;
+            IF  (r_fenus.emus_emus IS NOT NULL) THEN
+            
+                UPDATE NE_TEMUS
+                    SET
+                        emus_stne =vc_stne_dene
+                WHERE
+                    EMUS_EMUS =r_fenus.emus_emus;
+                
+                p_cod_rta   := 'OK';
+            ELSE
+
+                p_cod_rta   := 'ER_NOCES_US';
+            END IF;
+        
+        ELSE
+
+            p_cod_rta   := 'ER_USER_NE';
+        END if;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+            
+    END activarUsEmSy;    
 END NE_QFEUSY;
 /

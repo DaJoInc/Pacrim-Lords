@@ -141,7 +141,7 @@ CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.US_QUSER IS
         v_cod_rta_tipo          NE_TCRTA.CRTA_CRTA%type;
 
     BEGIN  
-        v_secuencia := US_SETUSER.NextVal;
+        v_secuencia := SNE_TEMUS.NextVal;
 
         US_QVUSER.validarUsuarioPorNombre
         (

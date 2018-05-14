@@ -1,0 +1,172 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+
+	<diskStore path="java.io.tmpdir" />
+
+	<!-- cahe para la interfaz ConfiguracionMapper -->
+	<cache name="consultarValorConfiguracion" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+
+	<!-- cahe para la interfaz CodigoErrorIdiomaMapper -->
+	<cache name="consultarMensajePorIdioma" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="consultarMensajePorDefecto" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="consultarCodigoMensajePorCodigoErrorEquivalente"
+		maxEntriesLocalHeap="100" maxEntriesLocalDisk="1000" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+
+	<!-- cahe para la interfaz SystemInfoMapper -->
+	<cache name="consultarInfoApp"
+		maxEntriesLocalHeap="100" maxEntriesLocalDisk="1000" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz TipoDocumentoMapper -->
+	<cache name="obtenerTiposDeDocumento" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="obtenerTiposDeDocumentoNatural" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="obtenerTiposDeDocumentoJuridica"
+		maxEntriesLocalHeap="100" maxEntriesLocalDisk="1000" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="obtenerTiposDeDocumentoNaturalYJuridica" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz ConsultaMovimientoMapper -->
+	<cache name="ListaTiposCosnutlaMovimientos" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz ConsultaTipoUsuarioMapper -->
+	<cache name="listarTiposUsuarios" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz ListaDetalleMapper -->
+	<cache name="listaDetallePorParametro" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz RespuestaCodigoTokenMapper -->
+	<cache name="consultarTipoOTP" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz EquivalenciaServiciosMapper -->
+	<cache name="consultarEquivalenciaDigipass" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="consultarEquivalenciaDigipassSIM" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="consultarEquivalenciaCRM"
+		maxEntriesLocalHeap="100" maxEntriesLocalDisk="1000" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz ImagenesSeguridadMapper -->
+	<cache name="selectCategoriaImagen" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="selectCategoriaImagenAleatoria" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz BloqueoMapper -->
+	<cache name="consultarTipoBloqueo" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz LogsAuditoriaMapper -->
+	<cache name="obtenerListaServicios" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<!-- cahe para la interfaz ServiciosMapper -->
+	<cache name="listarServiciosporPerfil" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="listarServicios" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+
+	<!-- cahe para la interfaz JasperMapper -->
+	<cache name="obtenerValorParametro" maxEntriesLocalHeap="100"
+		maxEntriesLocalDisk="1000" eternal="false" timeToIdleSeconds="300"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LFU"
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+</ehcache>

@@ -37,7 +37,7 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.US_QFPUSR IS
         p_id_psna                 OUT US_TPSNA.PSNA_PSNA%type,
         p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type
     );
-  PROCEDURE crearUsPeRo
+    PROCEDURE crearUsPeRo
     (
         p_nombre_roll               IN  US_TROLL.ROLL_RLDN%type,
         p_nombre_usuario            IN  US_TUSER.USER_ALAS%type,

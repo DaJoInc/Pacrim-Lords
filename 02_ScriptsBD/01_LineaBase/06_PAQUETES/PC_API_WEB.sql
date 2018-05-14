@@ -26,19 +26,130 @@ CREATE OR REPLACE PACKAGE FS_PCRM_US.PC_API_WEB IS
 
 
     -- ------------------------------------------------------------
+    -- ============================================================
+    -- Declaracion de PROCEDIMIENTOS y FUNCIONES
+    -- ============================================================
+    
+    -- ***********************************************************
+    -- Procedimientos funcionalidad usuarios
+    -- ***********************************************************
+        PROCEDURE crearUsPeRo
+        (
+            p_nombre_roll               IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario            IN  US_TUSER.USER_ALAS%type,
+            p_password_usuario          IN  US_TUSER.USER_PSWD%type,
+            p_documento_persona         IN  US_TPSNA.PSNA_NRID%type,
+            p_nombres_persona           IN  US_TPSNA.PSNA_NOBE%type,
+            p_apellido_persona          IN  US_TPSNA.PSNA_APDO%type,
+            p_direccion_persona         IN  US_TPSNA.PSNA_DIRN%type,
+            p_telefono_persona          IN  US_TPSNA.PSNA_TLFN%type,
+            p_email_persona             IN  US_TPSNA.PSNA_EMAL%type,
+            p_pais_persona              IN  US_TPSNA.PSNA_PAIS%type,
+            p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                   OUT NE_TCRTA.CRTA_DESCRI%type
+        );
+        -- ------------------------------------------------------------
+        
+        PROCEDURE actualizarUsPe
+        (
+            p_nombre_usuario            IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona         IN  US_TPSNA.PSNA_NRID%type,
+            p_documento_persona_act     IN  US_TPSNA.PSNA_NRID%type,
+            p_nombres_persona_act       IN  US_TPSNA.PSNA_NOBE%type,
+            p_apellido_persona_act      IN  US_TPSNA.PSNA_APDO%type,
+            p_direccion_persona_act     IN  US_TPSNA.PSNA_DIRN%type,
+            p_telefono_persona_act      IN  US_TPSNA.PSNA_TLFN%type,
+            p_email_persona_act         IN  US_TPSNA.PSNA_EMAL%type,
+            p_pais_persona_act          IN  US_TPSNA.PSNA_PAIS%type,
+            p_nombre_usuario_act        IN  US_TUSER.USER_ALAS%type,
+            p_password_usuario_act      IN  US_TUSER.USER_PSWD%type,
+            p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                   OUT NE_TCRTA.CRTA_DESCRI%type
+        );
+        -- ------------------------------------------------------------   
+        PROCEDURE asignarRolUsPe
+        (
+            p_nombre_roll               IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario            IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona         IN  US_TPSNA.PSNA_NRID%type,
+            p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                   OUT NE_TCRTA.CRTA_DESCRI%type
+        );
+    
+    -- ------------------------------------------------------------   
+    -- ___________________________________________________________ 
+    
+    -- ***********************************************************
+    -- Procedimientos funcionalidad empresas
+    -- ***********************************************************
+        
+        PROCEDURE crearEmpreNeg
+        (
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        );
+        
+        -- ------------------------------------------------------------         
+        PROCEDURE asignarNegoEmp
+        (
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        );
 
-    PROCEDURE comprarUsuario 
-    (
-        p_ctrl_operacion  IN  PYNT_TT_PN_TLGTR,
-        p_slpn_in         IN  PYNT_TT_PN_TSLPN,
-        p_slpn_out        OUT PYNT_TT_PN_TSLPN,
-        p_runt_saldo      OUT number,
-        p_cod_rta         OUT VARCHAR2,
-        p_msj_rta         OUT VARCHAR2,
-        p_mensajes        OUT PYNT_TT_PN_TMNSJE
-    );
-   
-   
+        -- ------------------------------------------------------------   
+        
+    -- ___________________________________________________________  
+    
+    -- ***********************************************************
+    -- Procedimientos funcionalidad negocio
+    -- ***********************************************************
+        
+        PROCEDURE registrarUsEmNego
+        (
+            p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_id_ussy                 OUT NE_TEMUS.EMUS_EMUS%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        );
+        
+        -- ------------------------------------------------------------         
+        PROCEDURE inactivarUsEmSy
+        (
+            p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        );
+        
+        PROCEDURE activarUsEmSy
+        (
+            p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        );
+        -- ------------------------------------------------------------   
+        
+    -- ___________________________________________________________ 
     -- ------------------------------------------------------------
     
 END PC_API_WEB;
@@ -51,181 +162,415 @@ prompt
 
 CREATE OR REPLACE PACKAGE BODY FS_PCRM_US.PC_API_WEB IS
 
-
-    -- ------------------------------------------------------------
-
-    PROCEDURE comprarUsuario 
-    (
-        p_ctrl_operacion  IN  PYNT_TT_PN_TLGTR,
-        p_slpn_in         IN  PYNT_TT_PN_TSLPN,
-        p_slpn_out        OUT PYNT_TT_PN_TSLPN,
-        p_runt_saldo      OUT number,
-        p_cod_rta         OUT VARCHAR2,
-        p_msj_rta         OUT VARCHAR2,
-        p_mensajes        OUT PYNT_TT_PN_TMNSJE
-    )
-    IS
-        v_mensajes PYNT_TT_PN_TMNSJE    := PYNT_TT_PN_TMNSJE();
+    -- ***********************************************************
+    -- Procedimientos funcionalidad usuarios
+    -- ***********************************************************
+        -- ===========================================================
+        -- PROCEDURE crearUsPeRo
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE crearUsPeRo
+        (
+            p_nombre_roll               IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario            IN  US_TUSER.USER_ALAS%type,
+            p_password_usuario          IN  US_TUSER.USER_PSWD%type,
+            p_documento_persona         IN  US_TPSNA.PSNA_NRID%type,
+            p_nombres_persona           IN  US_TPSNA.PSNA_NOBE%type,
+            p_apellido_persona          IN  US_TPSNA.PSNA_APDO%type,
+            p_direccion_persona         IN  US_TPSNA.PSNA_DIRN%type,
+            p_telefono_persona          IN  US_TPSNA.PSNA_TLFN%type,
+            p_email_persona             IN  US_TPSNA.PSNA_EMAL%type,
+            p_pais_persona              IN  US_TPSNA.PSNA_PAIS%type,
+            p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                   OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
         
-        v_prcs_gral                     PN_TCRTA.crta_prcs%type;       --Proceso al cual pertenece el codigo de respuesta
-        v_crta_http_gral                PN_TCRTA.crta_http_code%type;  --Codigo Http para el cogido interno de respuesta  
-        v_crta_descri_gral              PN_TCRTA.crta_descri%type;     --Descripcion general del codigo de respuesta
-        v_Usuario_id                        PN_TUsuario.Usuario_Usuario%type;           --ID Usuario interno
-        v_lgtr                          PN_TLGTR.lgtr_lgtr%type;       --Log de trasnsacciones
-        v_lgtr_id_entidad               PN_TLGTR.lgtr_id_entidad%type; --id entidad
-        e_lgtr_exception                exception;                     --Excepcion exclusiva para el log de operaciones
-
-    BEGIN
-        --
-        v_prcs_gral := 'PC_API_WEB.comprarUsuario';
+          v_cod_rta_ruser              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+        BEGIN  
         
-        -- =============================================
-        -- Se validan los parametros para inicio de log
-        -- =============================================
-        DECLARE
-            v_cod_rspta_lgtr_v            PN_TCRTA.crta_crta%type;
-            v_cod_rpta_descri_lgtr_v      PN_TCRTA.crta_descri%type;
-        BEGIN
-            PN_QLGTR_PYNT.validar_ctrl_operacion
-            (   
-                v_prcs_gral,
-                p_ctrl_operacion,
-                v_cod_rspta_lgtr_v,
-                v_cod_rpta_descri_lgtr_v,
-                v_mensajes
-            );
-            
-            if(v_cod_rspta_lgtr_v <> 'OK') then
-                raise e_lgtr_exception; 
-            end if;
-        END;
-        
-        -- =============================================
-        -- Se inicializa el log general para toda
-        -- la transaccion. A traves del log se puende
-        -- consultar el estado final y los errores
-        -- =============================================
-        declare
-            v_cod_rspta_lgtr         PN_TCRTA.crta_crta%type;       
-            v_cod_rpta_descri_lgtr   PN_TCRTA.crta_descri%type;
-        begin
-        
-            PN_QLGTR_PYNT.iniciar_log
+            US_QFPUSR.crearUsPeRo
             (
-                p_ctrl_operacion,
-                v_prcs_gral,
-                v_cod_rspta_lgtr,
-                v_cod_rpta_descri_lgtr,
-                v_lgtr
-            ); 
-            
-            
-        end; 
-        
-        -- =============================================
-        -- Se realizan llamado a servicio especializado
-        -- de negocio para la compra Usuario
-        -- =============================================
-        DECLARE
-        
-        BEGIN
-            PN_QGUsuario_PYNT.comprarUsuario
-            (
-                v_prcs_gral        ,--P_PRCS 
-                p_slpn_in          ,--P_SLPN_IN 
-                p_slpn_out         ,--P_SLPN_OUT
-                p_runt_saldo       ,--P_RUNT_SALDO
-                v_Usuario_id           ,--P_Usuario_ID
-                p_cod_rta          ,--P_COD_RTA 
-                p_msj_rta          ,--P_MSJ_RTA 
-                p_mensajes          --P_MENSAJES
+                p_nombre_roll       ,
+                p_nombre_usuario    ,
+                p_password_usuario  ,
+                p_documento_persona ,
+                p_nombres_persona   ,
+                p_apellido_persona  ,
+                p_direccion_persona ,
+                p_telefono_persona  ,
+                p_email_persona     ,
+                p_pais_persona      ,
+                v_cod_rta_ruser     
             );
+              
+            IF(v_cod_rta_ruser = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'Se registro correctamente el usuario';
+            ELSE
+                v_cod_rta     := 'ERR_INSR_USER';
+                v_msj_rta := 'No se registro el usuario';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio No se registro el usuario';
             
-        END;
+        END crearUsPeRo;
+
+        -- ===========================================================
+        -- PROCEDURE actualizarUsPe
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE actualizarUsPe
+        (
+            p_nombre_usuario            IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona         IN  US_TPSNA.PSNA_NRID%type,
+            p_documento_persona_act     IN  US_TPSNA.PSNA_NRID%type,
+            p_nombres_persona_act       IN  US_TPSNA.PSNA_NOBE%type,
+            p_apellido_persona_act      IN  US_TPSNA.PSNA_APDO%type,
+            p_direccion_persona_act     IN  US_TPSNA.PSNA_DIRN%type,
+            p_telefono_persona_act      IN  US_TPSNA.PSNA_TLFN%type,
+            p_email_persona_act         IN  US_TPSNA.PSNA_EMAL%type,
+            p_pais_persona_act          IN  US_TPSNA.PSNA_PAIS%type,
+            p_nombre_usuario_act        IN  US_TUSER.USER_ALAS%type,
+            p_password_usuario_act      IN  US_TUSER.USER_PSWD%type,
+            p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                   OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
         
-        -- =============================================
-        -- Luego de realizar todos los pasos de 
-        -- negocio se finaliza el log
-        -- de transaccion con el codigo general
-        -- =============================================
-        declare
-            v_cod_rspta_lgtr         PN_TCRTA.crta_crta%type;         
-            v_cod_rpta_descri_lgtr   PN_TCRTA.crta_descri%type;
-            v_cod_rspta_dlgtr        PN_TCRTA.crta_crta%type;
-            v_cod_rpta_descri_dlgtr  PN_TCRTA.crta_descri%type;
-            
-            v_dlgtr_observ           PN_TDLGTR.dlgtr_observ%type;
-            v_dlgtr_error            PN_TDLGTR.dlgtr_error%type;
-        begin
-            
-            if(p_mensajes is not null) then
-                
-            
-                for i in 1 .. p_mensajes.count loop
-                    
-                    
-                    v_dlgtr_observ := 'Mensaje Respuesta '||i||'. '||P_MENSAJES(i).crta;
-                    
-                    
-                    if(P_MENSAJES(i).crta = 'OK') then
-                        v_dlgtr_error:='Sin error';
-                        
-                    else
-                        v_dlgtr_error:='Detalle error: '||P_MENSAJES(i).detalle;
-                        
-                    end if;
-                    
-                    
-                    PN_QLGTR_PYNT.registrar_detalle_log
-                    (
-                        v_lgtr,
-                        v_prcs_gral,
-                        nvl(P_MENSAJES(i).crta, p_cod_rta),
-                        SUBSTR(v_dlgtr_observ, 1,1000),
-                        SUBSTR(v_dlgtr_error, 1, 4000),
-                        v_cod_rspta_dlgtr,
-                        v_cod_rpta_descri_dlgtr
-                    );
-                    
-                    
-                end loop;
-                
-            end if;
+          v_cod_rta_ruser              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+        BEGIN  
         
-            
-            v_lgtr_id_entidad := to_char(''||nvl(to_char(v_Usuario_id), '-'));
-            
-            PN_QLGTR_PYNT.finalizar_log
+            US_QFPUSR.actualizarUsPe
             (
-                v_lgtr,
-                p_cod_rta,
-                v_lgtr_id_entidad,
-                v_cod_rspta_lgtr,
-                v_cod_rpta_descri_lgtr
+                p_nombre_usuario         ,
+                p_documento_persona      ,
+                p_documento_persona_act  ,
+                p_nombres_persona_act    ,
+                p_apellido_persona_act   ,
+                p_direccion_persona_act  ,
+                p_telefono_persona_act   ,
+                p_email_persona_act      ,
+                p_pais_persona_act       ,
+                p_nombre_usuario_act     ,
+                p_password_usuario_act   ,
+                v_cod_rta_ruser                
             );
+              
+            IF(v_cod_rta_ruser = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'Se actualizando correctamente el usuario';
+            ELSE
+                v_cod_rta     := 'ERR_ACT_USER';
+                v_msj_rta := 'No se actualizando el usuario';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio No se actualizando el usuario';
             
-        
-        end;
+        END actualizarUsPe;        
 
+
+        -- ===========================================================
+        -- PROCEDURE actualizarUsPe
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE asignarRolUsPe
+        (
+            p_nombre_roll               IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario            IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona         IN  US_TPSNA.PSNA_NRID%type,
+            p_cod_rta                   OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                   OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
         
+          v_cod_rta_ruser              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+        BEGIN  
         
-    EXCEPTION
-        WHEN e_lgtr_exception THEN
+            US_QFPUSR.asignarRolUsPe
+            (
+                p_nombre_roll       ,
+                p_nombre_usuario    ,
+                p_documento_persona ,
+                v_cod_rta_ruser           
+            );
+              
+            IF(v_cod_rta_ruser = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'se puede asignar rol el correctamente del usuario';
+            ELSE
+                v_cod_rta     := 'ERR_ASIG_USEROL';
+                v_msj_rta := 'No se puede asignar rol el usuario';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio No se actualizando el usuario';
             
-            p_cod_rta  := 'ERROR';
-            p_msj_rta  := 'Operacion finaliza con errores. Error validando parametros de control';
-            p_mensajes := v_mensajes;
-        
-        WHEN OTHERS THEN
-                
-            p_cod_rta  := 'ERROR';
-            p_msj_rta  := 'Operacion finaliza con errores API. Error BD: '||sqlerrm;
-            p_mensajes := v_mensajes;
-       
-       
+        END asignarRolUsPe;        
+    -- ___________________________________________________________  
 
-    END comprarUsuario;
-    
-    
+    -- ***********************************************************
+    -- Procedimientos funcionalidad empresas
+    -- *********************************************************** 
+
+        -- ===========================================================
+        -- PROCEDURE crearEmpreNeg
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE crearEmpreNeg
+        (
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
+        
+          v_cod_rta_rempr              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+        BEGIN  
+        
+            US_QFEMTE.crearEmpreNeg
+            (
+                p_nombre_emprsa,
+                p_nit_emprsa   ,
+                p_tp_emprsa    ,
+                v_cod_rta_rempr      
+            );
+              
+            IF(v_cod_rta_rempr = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'se creo empresa correctamente';
+            ELSE
+                v_cod_rta     := 'ERR_ASIG_USEROL';
+                v_msj_rta := 'No se creo empresa correctamente';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio no se creo empresa correctamente';
+            
+        END crearEmpreNeg;      
+
+        -- ===========================================================
+        -- PROCEDURE asignarNegoEmp
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE asignarNegoEmp
+        (
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
+        
+          v_cod_rta_rempr              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+        BEGIN  
+        
+            US_QFEMTE.asignarNegoEmp
+            (
+                p_nombre_emprsa,
+                p_nit_emprsa   ,
+                p_tp_emprsa    ,
+                v_cod_rta_rempr      
+            );
+              
+            IF(v_cod_rta_rempr = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'se creo empresa correctamente';
+            ELSE
+                v_cod_rta     := 'ERR_ASIG_USEROL';
+                v_msj_rta := 'No se creo empresa correctamente';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio no se creo empresa correctamente';
+            
+        END asignarNegoEmp; 
+    -- ___________________________________________________________  
+
+    -- ***********************************************************
+    -- Procedimientos funcionalidad negocio
+    -- *********************************************************** 
+
+        -- ===========================================================
+        -- PROCEDURE registrarUsEmNego
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE registrarUsEmNego
+        (
+            p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_id_ussy                 OUT NE_TEMUS.EMUS_EMUS%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
+        
+          v_cod_rta_rusne              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+          v_id_emus               NE_TEMUS.EMUS_EMUS%type;
+        BEGIN  
+        
+            NE_QFEUSY.registrarUsEmNego
+            (
+                p_nombre_roll       ,
+                p_nombre_usuario    ,
+                p_documento_persona ,
+                p_nombre_emprsa     ,
+                p_nit_emprsa        ,
+                p_tp_emprsa         ,
+                v_id_emus           ,
+                v_cod_rta_rusne     
+            );
+              
+            IF(v_cod_rta_rusne = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'se creo negocio correctamente';
+            ELSE
+                v_cod_rta     := 'ERR_ASIG_USEROL';
+                v_msj_rta := 'No se creo negocio correctamente';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio no se creo negocio correctamente';
+            
+        END registrarUsEmNego;      
+
+        -- ===========================================================
+        -- PROCEDURE registrarUsEmNego
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE inactivarUsEmSy
+        (
+            p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
+        
+          v_cod_rta_rusne              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+        BEGIN  
+        
+            NE_QFEUSY.inactivarUsEmSy
+            (
+                p_nombre_roll      ,
+                p_nombre_usuario   ,
+                p_documento_persona,
+                p_nombre_emprsa    ,
+                p_nit_emprsa       ,
+                p_tp_emprsa        ,
+                v_cod_rta_rusne    
+            );
+              
+            IF(v_cod_rta_rusne = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'se inactiva negocio correctamente';
+            ELSE
+                v_cod_rta     := 'ERR_ASIG_USEROL';
+                v_msj_rta := 'No se inactiva negocio correctamente';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio no se inactiva negocio correctamente';
+            
+        END inactivarUsEmSy;   
+
+        -- ===========================================================
+        -- PROCEDURE registrarUsEmNego
+        -- -----------------------------------------------------------
+        -- permite creacion del usuario
+        -- ===========================================================
+        PROCEDURE activarUsEmSy
+        (
+            p_nombre_roll             IN  US_TROLL.ROLL_RLDN%type,
+            p_nombre_usuario          IN  US_TUSER.USER_ALAS%type,
+            p_documento_persona       IN  US_TPSNA.PSNA_NRID%type,
+            p_nombre_emprsa           IN  EM_TEMNE.EMNE_NOBE%type,
+            p_nit_emprsa              IN  EM_TEMNE.EMNE_NITE%type,
+            p_tp_emprsa               IN  EM_TTPEM.TPEM_DTEM%type,
+            p_cod_rta                 OUT NE_TCRTA.CRTA_CRTA%type,
+            p_msj_rta                 OUT NE_TCRTA.CRTA_DESCRI%type
+        )IS
+        
+          v_cod_rta_rusne              NE_TCRTA.CRTA_CRTA%type;
+          v_cod_rta                    NE_TCRTA.CRTA_CRTA%type;
+          v_msj_rta                    NE_TCRTA.CRTA_DESCRI%type;
+        BEGIN  
+        
+            NE_QFEUSY.activarUsEmSy
+            (
+                p_nombre_roll      ,
+                p_nombre_usuario   ,
+                p_documento_persona,
+                p_nombre_emprsa    ,
+                p_nit_emprsa       ,
+                p_tp_emprsa        ,
+                v_cod_rta_rusne    
+            );
+              
+            IF(v_cod_rta_rusne = 'OK') THEN
+              v_cod_rta     := 'OK';
+              v_msj_rta := 'se activa negocio correctamente';
+            ELSE
+                v_cod_rta     := 'ERR_ASIG_USEROL';
+                v_msj_rta := 'No se activa negocio correctamente';
+            END IF;
+            p_cod_rta  := v_cod_rta;
+            p_msj_rta  := v_msj_rta;
+        EXCEPTION
+            WHEN OTHERS THEN
+                p_cod_rta  := 'ERROR_NC';
+                p_msj_rta  := 'Error Negocio no se activa negocio correctamente';
+            
+        END activarUsEmSy;   
+    -- ___________________________________________________________      
+        
 END PC_API_WEB;
 /
