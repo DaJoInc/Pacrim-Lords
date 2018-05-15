@@ -5,6 +5,7 @@ import org.ada.security.model.persitencia.respuesta.ProcesoRespuestaApiDb;
 import org.ada.security.model.persitencia.usuario.UsuarioActualizarDBDto;
 import org.ada.security.model.persitencia.usuario.UsuarioDBDto;
 import org.ada.security.model.rest.respuesta.ProcesoRespuestaApiRest;
+import org.ada.security.model.rest.usuario.FuncionalidadUsuarioRestDto;
 import org.ada.security.model.rest.usuario.UsuarioActualizarRestDto;
 import org.ada.security.model.rest.usuario.UsuarioRestDto;
 import org.ada.util.constantes.ConstantesApiPathRest;
@@ -108,7 +109,7 @@ public class ServicioRestGestionadorUsuario {
 	}
 
 	@RequestMapping(value = ConstantesApiPathRest.PATH_ACTUALIZAR_USUARIO, method = RequestMethod.POST)
-	public ResponseEntity<ProcesoRespuestaApiRest> actualizarUsuarioPersona(@RequestBody UsuarioRestDto usuarioRestDto,UsuarioActualizarRestDto usuarioActualizarRestDto) {
+	public ResponseEntity<ProcesoRespuestaApiRest> actualizarUsuarioPersona(@RequestBody FuncionalidadUsuarioRestDto  funcionalidadUsuarioRestDto) {
 
 		/*
 		 * ==============================================
@@ -117,9 +118,20 @@ public class ServicioRestGestionadorUsuario {
 		 * ************************************************* 
 		 */
 		UsuarioDBDto usuarioDBDto = null;
+		UsuarioRestDto usuarioRestDto  = null;
+		UsuarioActualizarRestDto usuarioActualizarRestDto  = null;
 		UsuarioActualizarDBDto usuarioActualizarDBDto= null;
 		ProcesoRespuestaApiRest procesoRespuestaApiRest = null;
 		ProcesoRespuestaApiDb procesoRespuestaApiDb = null;
+
+		/*
+		  * =====================================
+		  * Este if se encarga de ...
+		  * =====================================
+		*/
+		if (funcionalidadUsuarioRestDto.getUsuarioRestDto()!= null && funcionalidadUsuarioRestDto.getActualizarRestDto()!= null) {
+			usuarioRestDto = funcionalidadUsuarioRestDto.getUsuarioRestDto();
+			usuarioActualizarRestDto = funcionalidadUsuarioRestDto.getActualizarRestDto();
 
 		/*
 		 * ==============================================
@@ -178,6 +190,11 @@ public class ServicioRestGestionadorUsuario {
 				procesoRespuestaApiRest.setMensajeRespuestaApi(ConstantesMensajesAplicacion.CODIGO_MENSAJE_ERROR_SERVICIO);
 			}
 
+		}else {
+			procesoRespuestaApiRest = new ProcesoRespuestaApiRest();
+			procesoRespuestaApiRest.setCodigoRespuestaApi(ConstantesCodigosAplicacion.CODIGO_ERROR_PARAMETROS_SERVICIO);
+			procesoRespuestaApiRest.setMensajeRespuestaApi(ConstantesMensajesAplicacion.CODIGO_MENSAJE_ERROR_PARAMETROS_SERVICIO);
+		}
 		}else {
 			procesoRespuestaApiRest = new ProcesoRespuestaApiRest();
 			procesoRespuestaApiRest.setCodigoRespuestaApi(ConstantesCodigosAplicacion.CODIGO_ERROR_PARAMETROS_SERVICIO);
