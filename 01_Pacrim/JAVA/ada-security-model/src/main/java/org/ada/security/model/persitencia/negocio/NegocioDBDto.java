@@ -10,8 +10,6 @@
 
 package org.ada.security.model.persitencia.negocio;
 
-import java.math.BigInteger;
-
 import org.ada.security.model.persitencia.usuario.UsuarioDBDto;
 
 /**

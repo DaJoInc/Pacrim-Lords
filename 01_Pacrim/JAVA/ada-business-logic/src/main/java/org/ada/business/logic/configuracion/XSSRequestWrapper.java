@@ -73,7 +73,8 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper{
       return super.getParameter(name);
   }
 
-  @Override
+  @SuppressWarnings("unchecked")
+@Override
   public Map<String, String[]> getParameterMap() {
       if (allParameters == null) {
           allParameters = new TreeMap<String, String[]>();

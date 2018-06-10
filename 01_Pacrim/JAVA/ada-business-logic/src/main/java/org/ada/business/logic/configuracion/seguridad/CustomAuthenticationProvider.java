@@ -1,6 +1,5 @@
 package org.ada.business.logic.configuracion.seguridad;
 
-import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,14 +11,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
 
 	
-	private static Logger logger = Logger.getLogger(CustomAuthenticationProvider.class);
+
  
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     	
     	String name = "";
     	String tipoUsuario = "";
-    	
+    	System.out.println(name+tipoUsuario);
     	
     	if(authentication.getName() != null && !authentication.getName().isEmpty()){
     		String[] partes = authentication.getName().split("\\|");

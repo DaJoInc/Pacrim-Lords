@@ -12,7 +12,6 @@ import org.ada.business.logic.configuracion.seguridad.AjaxAuthenticationSuccessH
 import org.ada.business.logic.configuracion.seguridad.CustomAuthenticationProvider;
 import org.ada.business.logic.configuracion.seguridad.LogoutAjaxAuthenticationSuccessHandler;
 import org.ada.util.constantes.ConstantesApiPathRest;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @ComponentScan("org.ada")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static Logger logger = Logger.getLogger(SecurityConfig.class);
+
 	@Inject
 	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
 

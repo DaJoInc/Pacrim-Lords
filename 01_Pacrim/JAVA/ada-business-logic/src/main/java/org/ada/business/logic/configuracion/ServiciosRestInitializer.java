@@ -10,7 +10,7 @@ public class ServiciosRestInitializer extends AbstractAnnotationConfigDispatcher
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
