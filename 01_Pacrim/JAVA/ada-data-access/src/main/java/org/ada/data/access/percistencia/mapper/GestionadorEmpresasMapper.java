@@ -7,7 +7,4 @@ public interface GestionadorEmpresasMapper {
 	public void crearEmpresaNegocio(HashMap<Object, Object> parametros);
 	
 	public void asignarNegocioEmpresa(HashMap<Object, Object> parametros);
-
-
-	
 }

@@ -54,6 +54,14 @@ public class ConstantesApiPathRest {
 	public static final String PATH_ACTIVAR_NEGOCIO_USUARIO_EMPRESA      = "/api/negocio/activar/usuario";
 	
 	/**
+	 * 
+	 * CRUD empresa
+	 */
+	public static final String PATH_SOLICITAR_PAISES                      = "/api/pais/lista";
+	public static final String PATH_OBTENER_PAIS_DEPARTAMENTO             = "/api/pais/departamento/lista";
+	public static final String PATH_OBTENER_PAIS_DEPARTAMENTO_CIUDAD      = "/api/pais/departamento/ciudad/lista";
+	
+	/**
 	 * LOGIN
 	 */
 	public static final String PATH_LOGIN= "/login";

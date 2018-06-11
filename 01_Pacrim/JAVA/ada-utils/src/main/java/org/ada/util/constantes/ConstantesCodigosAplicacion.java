@@ -23,7 +23,11 @@ package org.ada.util.constantes;
 public class ConstantesCodigosAplicacion {
 	
 	public static final String CODIGO_ERROR_SERVICIO = "ERROR_NEGOCIO_FATAL";
-	
+
 	public static final String CODIGO_ERROR_PARAMETROS_SERVICIO = "ERROR_PRMT_NEGOCIO_FATAL";
 
+	
+	public static final String CODIGO_OK_API_DB = "OK";
+	
+	public static final String CODIGO_ERROR_API_DB = "ERROR";
 }
